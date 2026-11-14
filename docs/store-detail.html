@@ -1,0 +1,1001 @@
+<!-- Modal Fullscreen untuk Gambar -->
+<div class="modal fade" id="fullscreenModal" tabindex="-1" aria-labelledby="fullscreenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white" id="fullscreenModalLabel">Foto Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center p-0">
+                <img id="fullscreenImage" src="" alt="Fullscreen Image" class="img-fluid" style="max-height: 90vh; max-width: 90vw; object-fit: contain;">
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Dokumen -->
+<div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentModalLabel">
+                    <i class="fas fa-file-alt me-2"></i>
+                    <span id="documentTitle">Dokumen</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-4">
+                <div class="document-modal-container">
+                    <img id="documentModalImage" 
+                         src="" 
+                         alt="Document Image" 
+                         class="img-fluid rounded shadow-sm"
+                         style="max-height: 70vh; object-fit: contain; cursor: zoom-in;"
+                         onclick="toggleDocumentZoom(this)">
+                </div>
+                <div class="document-modal-info mt-3">
+                    <p class="text-muted mb-0" id="documentNumber"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSS untuk Styling -->
+
+<!-- JavaScript untuk Interaksi -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yamaha NMAX Connected - Dewa Motor</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <!-- Vite Store Assets -->
+    <link rel="preload" as="style" href="build/assets/css/store-CJ6tEXCw.css" /><link rel="stylesheet" href="build/assets/css/store-CJ6tEXCw.css" />    
+    <!-- Vite Store Assets -->
+<link rel="preload" as="style" href="build/assets/css/store-CJ6tEXCw.css" /><link rel="stylesheet" href="build/assets/css/store-CJ6tEXCw.css" /></head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-motorcycle me-2"></i>
+                Dewa Motor
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>
+                            Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html" target="_blank">
+                            <i class="fas fa-user-shield me-1"></i>
+                            Admin
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="fas fa-phone me-1"></i>
+                            Kontak
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Container Detail Motor -->
+<div class="container py-5">
+    <div class="row">
+        <!-- Breadcrumb Navigation -->
+        <div class="col-12 mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="text-decoration-none">
+                            <i class="fas fa-home me-1"></i>
+                            Beranda
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="index.html" class="text-decoration-none">Motor</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Yamaha NMAX Connected
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Kolom Kiri: Detail Motor Utama -->
+        <div class="col-lg-8 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <!-- Section Gambar Motor -->
+                    <div class="motor-image-detail">
+                                                    <div class="position-relative">
+                                <!-- Carousel Gambar Utama -->
+                                <div id="motorCarousel" class="carousel slide" data-bs-ride="false">
+                                    <div class="carousel-inner">
+                                                                                <div class="carousel-item active">
+                                            <img src="images/no-photo.svg" 
+                                                 alt="Yamaha NMAX Connected - Foto 1"
+                                                 class="d-block w-100"
+                                                 style="height: 400px; object-fit: cover; border-radius: 15px 15px 0 0; cursor: pointer;"
+                                                 onclick="showFullscreenImage('/storage/photos/yamaha_nmax_2024.webp', 'Yamaha NMAX Connected - Foto 1')">
+                                        </div>
+                                                                            </div>
+                                    
+                                    <!-- Tombol Navigasi Carousel -->
+                                                                    </div>
+                                
+                                <!-- Badge Jumlah Foto -->
+                                <div class="photo-count-detail">
+                                    <i class="fas fa-images me-1"></i>
+                                    1 Foto
+                                </div>
+                            </div>
+                            
+                            <!-- Gallery Thumbnail -->
+                                                                        </div>
+
+                    <!-- Informasi Motor -->
+                    <div class="p-4">
+                        <!-- Header: Nama dan Harga -->
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h1 class="h2 mb-1">Yamaha NMAX Connected</h1>
+                                <p class="text-muted mb-0">Tahun 2024</p>
+                            </div>
+                            <div class="text-end">
+                                <div class="h3 text-primary mb-0">
+                                    Rp 38.500.000
+                                </div>
+                                <small class="text-muted">Harga Jual</small>
+                            </div>
+                        </div>
+
+                        <!-- Badge Kategori -->
+                                                    <div class="mb-3">
+                                                                    <span class="badge bg-warning text-dark me-2 mb-2">Kelas Menengah</span>
+                                                                    <span class="badge bg-warning text-dark me-2 mb-2">Yamaha</span>
+                                                                    <span class="badge bg-warning text-dark me-2 mb-2">Lengkap</span>
+                                                                    <span class="badge bg-warning text-dark me-2 mb-2">Mulus</span>
+                                                            </div>
+                        
+                        <!-- Badge Status -->
+                        <div class="mb-4">
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                <i class="fas fa-check me-1"></i>
+                                Tersedia
+                            </span>
+                        </div>
+
+                        <!-- Section Spesifikasi dan Dokumen -->
+                        <div class="row g-4 mb-4">
+                            <!-- Kolom Spesifikasi -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-cog text-primary me-2"></i>
+                                    Spesifikasi
+                                </h5>
+                                <div class="spec-list">
+                                    <div class="spec-item d-flex justify-content-between border-bottom py-2">
+                                        <span class="text-muted">Merek:</span>
+                                        <span class="fw-semibold">Yamaha</span>
+                                    </div>
+                                    <div class="spec-item d-flex justify-content-between border-bottom py-2">
+                                        <span class="text-muted">Model:</span>
+                                        <span class="fw-semibold">NMAX Connected</span>
+                                    </div>
+                                    <div class="spec-item d-flex justify-content-between border-bottom py-2">
+                                        <span class="text-muted">Tahun Pembuatan:</span>
+                                        <span class="fw-semibold">2024</span>
+                                    </div>
+                                    <div class="spec-item d-flex justify-content-between border-bottom py-2">
+                                        <span class="text-muted">Nomor Rangka:</span>
+                                        <span class="fw-semibold">MG1NX2229PK567892</span>
+                                    </div>
+                                    <div class="spec-item d-flex justify-content-between py-2">
+                                        <span class="text-muted">Nomor Mesin:</span>
+                                        <span class="fw-semibold">NX22E1567892</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kolom Dokumen -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-file-alt text-primary me-2"></i>
+                                    Dokumen
+                                </h5>
+                                                                    <div class="document-list">
+                                                                                    <div class="document-item border-bottom py-2">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                                        <span>STNK</span>
+                                                    </div>
+                                                                                                            <button class="btn btn-sm btn-outline-primary document-toggle-btn" 
+                                                                data-document-id="1"
+                                                                data-document-type="STNK"
+                                                                data-document-path="/storage/dokumen/stnk_template.png"
+                                                                title="Lihat dokumen STNK">
+                                                            <i class="fas fa-eye me-1"></i>
+                                                            <span class="toggle-text">Lihat</span>
+                                                        </button>
+                                                                                                    </div>
+                                                
+                                                <!-- Document Preview Container (Hidden by default) -->
+                                                                                                <div class="document-preview mt-2" id="preview-1" style="display: none;">
+                                                    <div class="document-image-container" 
+                                                         onclick="showDocumentModal('/storage/dokumen/stnk_template.png', 'STNK', 'STNK-B7890KGM')">
+                                                        <img src="images/no-photo.svg" 
+                                                             alt="Dokumen STNK"
+                                                             class="document-preview-image img-fluid">
+                                                        <div class="document-overlay">
+                                                            <i class="fas fa-search-plus"></i>
+                                                            <small>Klik untuk memperbesar</small>
+                                                        </div>
+                                                    </div>
+                                                                                                        <div class="document-info mt-2">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-hashtag me-1"></i>
+                                                            STNK-B7890KGM
+                                                        </small>
+                                                    </div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    <div class="document-item border-bottom py-2">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                                        <span>BPKB</span>
+                                                    </div>
+                                                                                                            <button class="btn btn-sm btn-outline-primary document-toggle-btn" 
+                                                                data-document-id="2"
+                                                                data-document-type="BPKB"
+                                                                data-document-path="/storage/dokumen/bpkb_template.png"
+                                                                title="Lihat dokumen BPKB">
+                                                            <i class="fas fa-eye me-1"></i>
+                                                            <span class="toggle-text">Lihat</span>
+                                                        </button>
+                                                                                                    </div>
+                                                
+                                                <!-- Document Preview Container (Hidden by default) -->
+                                                                                                <div class="document-preview mt-2" id="preview-2" style="display: none;">
+                                                    <div class="document-image-container" 
+                                                         onclick="showDocumentModal('/storage/dokumen/bpkb_template.png', 'BPKB', 'BPKB-PK567892')">
+                                                        <img src="images/no-photo.svg" 
+                                                             alt="Dokumen BPKB"
+                                                             class="document-preview-image img-fluid">
+                                                        <div class="document-overlay">
+                                                            <i class="fas fa-search-plus"></i>
+                                                            <small>Klik untuk memperbesar</small>
+                                                        </div>
+                                                    </div>
+                                                                                                        <div class="document-info mt-2">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-hashtag me-1"></i>
+                                                            BPKB-PK567892
+                                                        </small>
+                                                    </div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    <div class="document-item border-bottom py-2">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                                        <span>Faktur</span>
+                                                    </div>
+                                                                                                            <button class="btn btn-sm btn-outline-primary document-toggle-btn" 
+                                                                data-document-id="3"
+                                                                data-document-type="Faktur"
+                                                                data-document-path="/storage/dokumen/faktur_template.png"
+                                                                title="Lihat dokumen Faktur">
+                                                            <i class="fas fa-eye me-1"></i>
+                                                            <span class="toggle-text">Lihat</span>
+                                                        </button>
+                                                                                                    </div>
+                                                
+                                                <!-- Document Preview Container (Hidden by default) -->
+                                                                                                <div class="document-preview mt-2" id="preview-3" style="display: none;">
+                                                    <div class="document-image-container" 
+                                                         onclick="showDocumentModal('/storage/dokumen/faktur_template.png', 'Faktur', 'FK-E1567892')">
+                                                        <img src="images/no-photo.svg" 
+                                                             alt="Dokumen Faktur"
+                                                             class="document-preview-image img-fluid">
+                                                        <div class="document-overlay">
+                                                            <i class="fas fa-search-plus"></i>
+                                                            <small>Klik untuk memperbesar</small>
+                                                        </div>
+                                                    </div>
+                                                                                                        <div class="document-info mt-2">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-hashtag me-1"></i>
+                                                            FK-E1567892
+                                                        </small>
+                                                    </div>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                            </div>
+                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Kanan: Card Kontak -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="card-title mb-4">
+                        <i class="fas fa-phone text-primary me-2"></i>
+                        Hubungi Kami
+                    </h5>
+                    
+                    <!-- Tombol Kontak -->
+                    <div class="d-grid gap-3">
+                        <!-- Tombol WhatsApp -->
+                        <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha NMAX Connected tahun 2024. Bisakah saya mendapatkan informasi lebih lanjut?" 
+                           target="_blank" 
+                           class="btn btn-success btn-lg">
+                            <i class="fab fa-whatsapp me-2"></i>
+                            Chat WhatsApp
+                        </a>
+
+                        <!-- Tombol Telepon -->
+                        <a href="tel:+6282135277434" class="btn btn-primary btn-lg">
+                            <i class="fas fa-phone me-2"></i>
+                            Telepon Sekarang
+                        </a>
+
+                        <!-- Tombol Kunjungi Toko -->
+                        <a href="https://maps.app.goo.gl/GDqPT6xRwyg5KmgdA" target="_blank" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Kunjungi Toko
+                        </a>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Informasi Toko -->
+                    <div class="store-info">
+                        <h6 class="mb-3">
+                            <i class="fas fa-store text-primary me-2"></i>
+                            Informasi Toko
+                        </h6>
+                        
+                        <div class="info-item mb-2">
+                            <i class="fas fa-map-marker-alt text-muted me-2"></i>
+                            <small>Jl. Pandanaran - Uii</small>
+                        </div>
+                        
+                        <div class="info-item mb-2">
+                            <i class="fas fa-clock text-muted me-2"></i>
+                            <small>Senin - Sabtu: 08:00 - 17:00</small>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope text-muted me-2"></i>
+                            <small>infodewamotor@gmail.com</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Motor Serupa -->
+            <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="mb-4">
+                    <i class="fas fa-motorcycle text-primary me-2"></i>
+                    Motor Serupa
+                </h3>
+                
+                <!-- Grid Motor Serupa -->
+                <div class="row g-4">
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="motor-card">
+                                <!-- Gambar Motor -->
+                                <div class="motor-image">
+                                                                            <div class="position-relative">
+                                            <a href="store-detail.html">
+                                                <img src="images/no-photo.svg" 
+                                                     alt="Yamaha WR 155"
+                                                     class="img-fluid w-100"
+                                                     style="height: 200px; object-fit: cover; border-radius: 10px; cursor: pointer;">
+                                            </a>
+                                            
+                                                                                    </div>
+                                                                    </div>
+
+                                <!-- Info Motor -->
+                                <div class="motor-info">
+                                    <h5 class="motor-title">Yamaha WR 155</h5>
+                                    
+                                    <div class="motor-price">
+                                        Rp 39.500.000
+                                    </div>
+
+                                    <div class="motor-details">
+                                        <span>
+                                            <i class="fas fa-calendar-alt me-1"></i>
+                                            2024
+                                        </span>
+                                    </div>
+
+                    <!-- Badge Kategori -->
+                                            <div class="mb-3">
+                                                            <span class="category-badge">Kelas Menengah</span>
+                                                            <span class="category-badge">Yamaha</span>
+                                                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="d-grid gap-2">
+                        <a href="store-detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye me-1"></i>
+                            Lihat Detail
+                        </a>
+                        
+                        <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha WR 155 tahun 2024. Bisakah saya mendapatkan informasi lebih lanjut?" 
+                           target="_blank" 
+                           class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp me-1"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="motor-card">
+                                <!-- Gambar Motor -->
+                                <div class="motor-image">
+                                                                            <div class="position-relative">
+                                            <a href="store-detail.html">
+                                                <img src="images/no-photo.svg" 
+                                                     alt="Yamaha XSR 155"
+                                                     class="img-fluid w-100"
+                                                     style="height: 200px; object-fit: cover; border-radius: 10px; cursor: pointer;">
+                                            </a>
+                                            
+                                                                                    </div>
+                                                                    </div>
+
+                                <!-- Info Motor -->
+                                <div class="motor-info">
+                                    <h5 class="motor-title">Yamaha XSR 155</h5>
+                                    
+                                    <div class="motor-price">
+                                        Rp 38.500.000
+                                    </div>
+
+                                    <div class="motor-details">
+                                        <span>
+                                            <i class="fas fa-calendar-alt me-1"></i>
+                                            2025
+                                        </span>
+                                    </div>
+
+                    <!-- Badge Kategori -->
+                                            <div class="mb-3">
+                                                            <span class="category-badge">Kelas Menengah</span>
+                                                            <span class="category-badge">Yamaha</span>
+                                                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="d-grid gap-2">
+                        <a href="store-detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye me-1"></i>
+                            Lihat Detail
+                        </a>
+                        
+                        <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha XSR 155 tahun 2025. Bisakah saya mendapatkan informasi lebih lanjut?" 
+                           target="_blank" 
+                           class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp me-1"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="motor-card">
+                                <!-- Gambar Motor -->
+                                <div class="motor-image">
+                                                                            <div class="position-relative">
+                                            <a href="store-detail.html">
+                                                <img src="images/no-photo.svg" 
+                                                     alt="Yamaha NMAX Connected"
+                                                     class="img-fluid w-100"
+                                                     style="height: 200px; object-fit: cover; border-radius: 10px; cursor: pointer;">
+                                            </a>
+                                            
+                                                                                    </div>
+                                                                    </div>
+
+                                <!-- Info Motor -->
+                                <div class="motor-info">
+                                    <h5 class="motor-title">Yamaha NMAX Connected</h5>
+                                    
+                                    <div class="motor-price">
+                                        Rp 40.500.000
+                                    </div>
+
+                                    <div class="motor-details">
+                                        <span>
+                                            <i class="fas fa-calendar-alt me-1"></i>
+                                            2025
+                                        </span>
+                                    </div>
+
+                    <!-- Badge Kategori -->
+                                            <div class="mb-3">
+                                                            <span class="category-badge">Kelas Menengah</span>
+                                                            <span class="category-badge">Yamaha</span>
+                                                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="d-grid gap-2">
+                        <a href="store-detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye me-1"></i>
+                            Lihat Detail
+                        </a>
+                        
+                        <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha NMAX Connected tahun 2025. Bisakah saya mendapatkan informasi lebih lanjut?" 
+                           target="_blank" 
+                           class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp me-1"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="motor-card">
+                                <!-- Gambar Motor -->
+                                <div class="motor-image">
+                                                                            <div class="position-relative">
+                                            <a href="store-detail.html">
+                                                <img src="images/no-photo.svg" 
+                                                     alt="Yamaha Aerox Connected"
+                                                     class="img-fluid w-100"
+                                                     style="height: 200px; object-fit: cover; border-radius: 10px; cursor: pointer;">
+                                            </a>
+                                            
+                                                                                    </div>
+                                                                    </div>
+
+                                <!-- Info Motor -->
+                                <div class="motor-info">
+                                    <h5 class="motor-title">Yamaha Aerox Connected</h5>
+                                    
+                                    <div class="motor-price">
+                                        Rp 31.000.000
+                                    </div>
+
+                                    <div class="motor-details">
+                                        <span>
+                                            <i class="fas fa-calendar-alt me-1"></i>
+                                            2024
+                                        </span>
+                                    </div>
+
+                    <!-- Badge Kategori -->
+                                            <div class="mb-3">
+                                                            <span class="category-badge">Kelas Menengah</span>
+                                                            <span class="category-badge">Yamaha</span>
+                                                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="d-grid gap-2">
+                        <a href="store-detail.html" class="btn btn-primary">
+                            <i class="fas fa-eye me-1"></i>
+                            Lihat Detail
+                        </a>
+                        
+                        <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha Aerox Connected tahun 2024. Bisakah saya mendapatkan informasi lebih lanjut?" 
+                           target="_blank" 
+                           class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp me-1"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>
+                        <i class="fas fa-motorcycle me-2"></i>
+                        Dewa Motor
+                    </h5>
+                    <p class="text-light">
+                        Dealer motor terpercaya dengan koleksi motor berkualitas tinggi 
+                        dan pelayanan terbaik untuk kebutuhan transportasi Anda.
+                    </p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Menu</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="index.html">Motor</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Kontak</h5>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Jl. Pandanaran - Uii
+                        </li>
+                        <li>
+                            <i class="fas fa-phone me-2"></i>
+                            +62 821-3527-7434
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope me-2"></i>
+                            infodewamotor@gmail.com
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Jam Operasional</h5>
+                    <ul class="footer-links">
+                        <li>Senin - Jumat: 08:00 - 17:00</li>
+                        <li>Sabtu: 08:00 - 15:00</li>
+                        <li>Minggu: Tutup</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            
+            <div class="text-center">
+                <p class="text-light mb-0">
+                    &copy; 2026 Dewa Motor. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+// Fungsi untuk mengubah slide carousel
+function changeCarouselSlide(index) {
+    var carousel = document.getElementById('motorCarousel');
+    var carouselInstance = new bootstrap.Carousel(carousel);
+    carouselInstance.to(index);
+    
+    // Perbarui thumbnail aktif
+    document.querySelectorAll('.photo-thumbnail').forEach(function(thumb, i) {
+        thumb.classList.toggle('active', i === index);
+    });
+}
+
+// Fungsi untuk menampilkan gambar fullscreen
+function showFullscreenImage(src, title) {
+    var modal = new bootstrap.Modal(document.getElementById('fullscreenModal'));
+    document.getElementById('fullscreenImage').src = src;
+    document.getElementById('fullscreenModalLabel').textContent = title;
+    modal.show();
+}
+
+// Fungsi untuk menampilkan modal dokumen
+function showDocumentModal(src, type, number) {
+    try {
+        console.log('showDocumentModal called with:', { src, type, number }); // Debug log
+        
+        var modalElement = document.getElementById('documentModal');
+        if (!modalElement) {
+            console.error('Document modal element not found');
+            return;
+        }
+        
+        var documentTitle = document.getElementById('documentTitle');
+        var documentImage = document.getElementById('documentModalImage');
+        var documentNumber = document.getElementById('documentNumber');
+        
+        if (!documentTitle || !documentImage || !documentNumber) {
+            console.error('Modal elements not found');
+            return;
+        }
+        
+        // Set modal content
+        documentTitle.textContent = type;
+        documentImage.src = src;
+        documentImage.alt = 'Dokumen ' + type;
+        documentNumber.textContent = number ? 'Nomor: ' + number : '';
+        
+        // Show modal with Bootstrap or fallback
+        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            var modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        } else {
+            // Fallback: show modal manually
+            modalElement.style.display = 'block';
+            modalElement.classList.add('show');
+            document.body.classList.add('modal-open');
+            
+            // Add backdrop
+            var backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop fade show';
+            backdrop.onclick = function() {
+                hideDocumentModal();
+            };
+            document.body.appendChild(backdrop);
+        }
+        
+        console.log('Document modal shown successfully');
+    } catch (error) {
+        console.error('Error showing document modal:', error);
+        alert('Terjadi kesalahan saat membuka dokumen. Silakan coba lagi.');
+    }
+}
+
+// Fungsi untuk menyembunyikan modal dokumen (fallback)
+function hideDocumentModal() {
+    var modalElement = document.getElementById('documentModal');
+    var backdrop = document.querySelector('.modal-backdrop');
+    
+    if (modalElement) {
+        modalElement.style.display = 'none';
+        modalElement.classList.remove('show');
+    }
+    
+    if (backdrop) {
+        backdrop.remove();
+    }
+    
+    // Force remove modal-open class and restore scrolling
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.documentElement.style.overflow = '';
+    
+    // Additional cleanup for any remaining modal classes
+    var allBackdrops = document.querySelectorAll('.modal-backdrop');
+    allBackdrops.forEach(function(el) {
+        el.remove();
+    });
+}
+
+// Fungsi untuk zoom dokumen di modal
+function toggleDocumentZoom(img) {
+    img.classList.toggle('zoomed');
+}
+
+// Event listener untuk interaksi carousel dan modal
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing document functionality...');
+    
+    var carousel = document.getElementById('motorCarousel');
+    if (carousel) {
+        // Sinkronisasi thumbnail dengan carousel
+        carousel.addEventListener('slid.bs.carousel', function(event) {
+            var activeIndex = event.to;
+            document.querySelectorAll('.photo-thumbnail').forEach(function(thumb, i) {
+                thumb.classList.toggle('active', i === activeIndex);
+            });
+        });
+    }
+    
+    // Document toggle functionality
+    document.querySelectorAll('.document-toggle-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var documentId = this.getAttribute('data-document-id');
+            var preview = document.getElementById('preview-' + documentId);
+            var toggleText = this.querySelector('.toggle-text');
+            var icon = this.querySelector('i');
+            
+            if (preview.style.display === 'none' || preview.style.display === '') {
+                // Show preview
+                preview.style.display = 'block';
+                toggleText.textContent = 'Sembunyikan';
+                icon.className = 'fas fa-eye-slash me-1';
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('btn-outline-secondary');
+                
+                // Animate in
+                preview.style.opacity = '0';
+                preview.style.transform = 'translateY(-10px)';
+                setTimeout(function() {
+                    preview.style.transition = 'all 0.3s ease';
+                    preview.style.opacity = '1';
+                    preview.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                // Hide preview
+                preview.style.transition = 'all 0.3s ease';
+                preview.style.opacity = '0';
+                preview.style.transform = 'translateY(-10px)';
+                setTimeout(function() {
+                    preview.style.display = 'none';
+                    toggleText.textContent = 'Lihat';
+                    icon.className = 'fas fa-eye me-1';
+                    btn.classList.remove('btn-outline-secondary');
+                    btn.classList.add('btn-outline-primary');
+                }, 300);
+            }
+        });
+    });
+    
+    // Additional event listeners for document image containers
+    document.querySelectorAll('.document-image-container').forEach(function(container, index) {
+        console.log('Adding click listener to document container', index);
+        
+        container.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Document container clicked!', e.target);
+            
+            var img = this.querySelector('.document-preview-image');
+            if (img) {
+                var src = img.src;
+                var alt = img.alt;
+                var documentType = alt.replace('Dokumen ', '');
+                
+                // Try to get document number from the document info
+                var documentInfo = this.parentElement.querySelector('.document-info small');
+                var documentNumber = documentInfo ? documentInfo.textContent.replace('# ', '').replace(/\s+/g, ' ').trim() : '';
+                
+                console.log('Document container clicked:', { src, documentType, documentNumber });
+                showDocumentModal(src, documentType, documentNumber);
+            } else {
+                console.error('No image found in container');
+            }
+        });
+        
+        // Add pointer cursor to indicate clickable
+        container.style.cursor = 'pointer';
+        
+        // Also add click listener to the image as backup
+        var img = container.querySelector('.document-preview-image');
+        if (img) {
+            img.style.pointerEvents = 'auto'; // Re-enable pointer events on image
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Image clicked directly');
+                container.click(); // Trigger container click
+            });
+        }
+    });
+    
+    console.log('Found', document.querySelectorAll('.document-image-container').length, 'document containers');
+    
+    // Keyboard navigation untuk modal
+    document.addEventListener('keydown', function(event) {
+        var fullscreenModal = document.getElementById('fullscreenModal');
+        var documentModal = document.getElementById('documentModal');
+        
+        if (event.key === 'Escape') {
+            if (fullscreenModal && fullscreenModal.classList.contains('show')) {
+                if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                    bootstrap.Modal.getInstance(fullscreenModal).hide();
+                } else {
+                    fullscreenModal.style.display = 'none';
+                    fullscreenModal.classList.remove('show');
+                    // Restore scroll for fullscreen modal
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                    document.documentElement.style.overflow = '';
+                    document.body.classList.remove('modal-open');
+                }
+            }
+            if (documentModal && documentModal.classList.contains('show')) {
+                if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                    bootstrap.Modal.getInstance(documentModal).hide();
+                } else {
+                    hideDocumentModal();
+                }
+                console.log('Document modal closed via ESC key');
+            }
+        }
+    });
+    
+    // Add click listeners to modal close buttons
+    var documentModalCloseButtons = document.querySelectorAll('#documentModal .btn-close, #documentModal .btn-secondary');
+    documentModalCloseButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            hideDocumentModal();
+        });
+    });
+    
+    // Add Bootstrap modal event listeners for proper cleanup
+    var documentModal = document.getElementById('documentModal');
+    if (documentModal) {
+        documentModal.addEventListener('hidden.bs.modal', function() {
+            // Ensure scroll is restored when modal is closed via Bootstrap
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            document.documentElement.style.overflow = '';
+            document.body.classList.remove('modal-open');
+            
+            // Clean up any remaining backdrops
+            var allBackdrops = document.querySelectorAll('.modal-backdrop');
+            allBackdrops.forEach(function(el) {
+                el.remove();
+            });
+            
+            console.log('Document modal closed, scroll restored');
+        });
+        
+        documentModal.addEventListener('hide.bs.modal', function() {
+            console.log('Document modal hiding...');
+        });
+        
+        // Add click listener to modal backdrop
+        documentModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                // Clicked on modal backdrop
+                if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                    bootstrap.Modal.getInstance(this).hide();
+                } else {
+                    hideDocumentModal();
+                }
+            }
+        });
+    }
+    
+    console.log('Document functionality initialized successfully!');
+});
+</script>
+<script src="demo.js"></script>
+</body>
+</html>

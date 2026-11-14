@@ -1,73 +1,1181 @@
+<!-- CSS untuk Styling -->
+
+<!-- JavaScript untuk Interaksi -->
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dewa Motor — Demo Katalog & CMS Motor Bekas</title>
-<meta name="description" content="Demo front-end katalog dan CMS showroom motor bekas Dewa Motor (aslinya Laravel): katalog unit, pencarian, filter, dan kelola stok dengan data dummy di browser.">
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Tersedia - Dewa Motor</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <!-- Vite Store Assets -->
+    <link rel="preload" as="style" href="build/assets/css/store-CJ6tEXCw.css" /><link rel="stylesheet" href="build/assets/css/store-CJ6tEXCw.css" />    
+    <!-- Vite Store Assets -->
+<link rel="preload" as="style" href="build/assets/css/store-CJ6tEXCw.css" /><link rel="stylesheet" href="build/assets/css/store-CJ6tEXCw.css" /></head>
 <body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <div>
-      <div class="brand">DEWA <span>MOTOR</span></div>
-      <div class="brand-sub">Jual Beli Motor Bekas Berkualitas — Yogyakarta</div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-motorcycle me-2"></i>
+                Dewa Motor
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>
+                            Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html" target="_blank">
+                            <i class="fas fa-user-shield me-1"></i>
+                            Admin
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="fas fa-phone me-1"></i>
+                            Kontak
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section - Banner Utama -->
+<section class="hero-section">
+    <div class="container">
+        <h1><i class="fas fa-motorcycle me-3"></i>Motor Bekas Jogja</h1>
+        <p>Temukan motor impian Anda dengan kualitas terbaik dan harga terjangkau</p>
+        
+        <!-- Statistik Singkat -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <!-- Total Motor Tersedia -->
+                    <div class="text-center">
+                        <div class="h3 mb-0">24</div>
+                        <small>Motor Tersedia</small>
+                    </div>
+                    
+                    <!-- Total Merek -->
+                    <div class="text-center">
+                        <div class="h3 mb-0">5</div>
+                        <small>Merek Tersedia</small>
+                    </div>
+                    
+                    <!-- Total Kategori -->
+                    <div class="text-center">
+                        <div class="h3 mb-0">14</div>
+                        <small>Kategori</small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <a class="btn btn-ghost-light" href="https://github.com/Hasbi1605/Database_DewaMotor_CMS" target="_blank" rel="noopener">Kode Sumber (Laravel)</a>
-  </div>
-</header>
+</section>
 
-<div class="wrap">
-  <div class="demo-banner"><strong>Demo Front-End</strong> — versi tampilan dari aplikasi Laravel aslinya.
-    Data unit bersifat dummy dan tersimpan lokal di browser Anda; tambah/edit/hapus &amp; ubah status benar-benar bekerja di sisi klien.</div>
+    <div class="card-body">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Selamat datang, Administrator!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        
+        
+        <div class="row">
 
-  <div class="stats" id="stats"></div>
+<!-- Filter Section - Area Pencarian dan Filter -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-card">
+            <form method="GET" action="index.html" id="filterForm">
+                <div class="row g-3">
+                    <!-- Input Pencarian Merek -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">
+                            <i class="fas fa-search me-1"></i>
+                            Cari Merek
+                        </label>
+                        <input type="text" class="form-control" name="brand" 
+                               value="" 
+                               placeholder="Contoh: Honda, Yamaha">
+                    </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="katalog" onclick="switchTab('katalog')">Katalog Unit</button>
-    <button class="tab" data-tab="kelola" onclick="switchTab('kelola')">Kelola Unit (Admin)</button>
-  </div>
+                    <!-- Dropdown Filter Kategori -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">
+                            <i class="fas fa-tags me-1"></i>
+                            Kategori
+                        </label>
+                        <select class="form-select" name="category">
+                            <option value="">Semua Kategori</option>
+                            
+                            <!-- Optgroup Merek -->
+                                                            <optgroup label="Merek">
+                                                                            <option value="4" 
+                                                >
+                                            Honda
+                                        </option>
+                                                                            <option value="5" 
+                                                >
+                                            Yamaha
+                                        </option>
+                                                                            <option value="6" 
+                                                >
+                                            Suzuki
+                                        </option>
+                                                                            <option value="7" 
+                                                >
+                                            Vespa
+                                        </option>
+                                                                            <option value="8" 
+                                                >
+                                            Kawasaki
+                                        </option>
+                                                                    </optgroup>
+                            
+                            <!-- Optgroup Kelas -->
+                                                            <optgroup label="Kelas">
+                                                                            <option value="1" 
+                                                >
+                                            Kelas Atas
+                                        </option>
+                                                                            <option value="2" 
+                                                >
+                                            Kelas Menengah
+                                        </option>
+                                                                            <option value="3" 
+                                                >
+                                            Kelas Bawah
+                                        </option>
+                                                                    </optgroup>
+                            
+                            <!-- Optgroup Kelengkapan Dokumen -->
+                                                            <optgroup label="Kelengkapan Dokumen">
+                                                                            <option value="9" 
+                                                >
+                                            Lengkap
+                                        </option>
+                                                                            <option value="10" 
+                                                >
+                                            Kurang Lengkap
+                                        </option>
+                                                                            <option value="11" 
+                                                >
+                                            Tidak Ada
+                                        </option>
+                                                                    </optgroup>
+                            
+                            <!-- Optgroup Kondisi Motor -->
+                                                            <optgroup label="Kondisi Motor">
+                                                                            <option value="12" 
+                                                >
+                                            Mulus
+                                        </option>
+                                                                            <option value="13" 
+                                                >
+                                            Normal
+                                        </option>
+                                                                            <option value="14" 
+                                                >
+                                            Butuh Perbaikan
+                                        </option>
+                                                                    </optgroup>
+                                                    </select>
+                    </div>
 
-  <section id="tab-katalog">
-    <div class="toolbar">
-      <input id="search" type="search" placeholder="Cari merek atau model… (mis. NMAX, Beat)" oninput="renderKatalog()">
-      <select id="filter-kategori" onchange="renderKatalog()">
-        <option value="">Semua Kategori</option><option>Matic</option><option>Sport</option><option>Bebek</option>
-      </select>
-      <select id="filter-status" onchange="renderKatalog()">
-        <option value="">Semua Status</option><option>Tersedia</option><option>Terjual</option>
-      </select>
+                    <!-- Filter Rentang Harga -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">
+                            <i class="fas fa-money-bill me-1"></i>
+                            Rentang Harga
+                        </label>
+                        <div class="row g-1">
+                            <!-- Harga Minimum -->
+                            <div class="col-6">
+                                <input type="number" class="form-control form-control-sm" 
+                                       name="min_price" value="" 
+                                       placeholder="Min" min="0">
+                            </div>
+                            <!-- Harga Maksimum -->
+                            <div class="col-6">
+                                <input type="number" class="form-control form-control-sm" 
+                                       name="max_price" value="" 
+                                       placeholder="Max" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Rentang Tahun -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">
+                            <i class="fas fa-calendar me-1"></i>
+                            Tahun
+                        </label>
+                        <div class="row g-1">
+                            <!-- Tahun Minimum -->
+                            <div class="col-6">
+                                <input type="number" class="form-control form-control-sm" 
+                                       name="min_year" value="" 
+                                       placeholder="2024" min="2024">
+                            </div>
+                            <!-- Tahun Maksimum -->
+                            <div class="col-6">
+                                <input type="number" class="form-control form-control-sm" 
+                                       name="max_year" value="" 
+                                       placeholder="2025" max="2025">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baris Kedua: Pengurutan dan Tombol Aksi -->
+                <div class="row mt-3">
+                    <!-- Dropdown Pengurutan -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            <i class="fas fa-sort me-1"></i>
+                            Urutkan
+                        </label>
+                        <select class="form-select" name="sort" onchange="document.getElementById('filterForm').submit()">
+                            <option value="created_at" >Terbaru</option>
+                            <option value="price_low" >Harga Terendah</option>
+                            <option value="price_high" >Harga Tertinggi</option>
+                            <option value="year_new" >Tahun Terbaru</option>
+                            <option value="year_old" >Tahun Terlama</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Tombol Filter dan Reset -->
+                    <div class="col-md-6 d-flex align-items-end gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter me-1"></i>
+                            Filter
+                        </button>
+                        <a href="index.html" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i>
+                            Reset
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="grid" id="katalog-grid"></div>
-    <p class="empty" id="katalog-empty" hidden>Tidak ada unit yang cocok dengan pencarian/filter.</p>
-  </section>
+</section>
 
-  <section id="tab-kelola" hidden>
-    <div class="page-head">
-      <h2>Data Unit Kendaraan</h2>
-      <div>
-        <button class="btn btn-outline-dark" onclick="resetData()">Reset Data Demo</button>
-        <button class="btn btn-primary" onclick="openForm()">+ Tambah Unit</button>
-      </div>
+<!-- Motors Grid Section - Daftar Motor -->
+<section class="py-5">
+    <div class="container">
+                    <!-- Header Hasil Pencarian -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0">
+                    <i class="fas fa-motorcycle me-2 text-primary"></i>
+                    Motor Tersedia
+                </h3>
+            </div>
+
+            <!-- Grid Card Motor -->
+            <div class="row g-4">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Honda Revo" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Honda Revo</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 18.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2024
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Bawah</span>
+                                                                                    <span class="category-badge">Honda</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Honda Revo tahun 2024" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Honda ADV 160" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Honda ADV 160</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 38.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Honda</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Honda ADV 160 tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Honda CBR 250RR" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Honda CBR 250RR</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 79.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Atas</span>
+                                                                                    <span class="category-badge">Honda</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Honda CBR 250RR tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Honda Street RS" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Honda Street RS</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 30.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Honda</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Honda Street RS tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Kawasaki Ninja ZX-25R" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Kawasaki Ninja ZX-25R</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 108.000.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Atas</span>
+                                                                                    <span class="category-badge">Kawasaki</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Kawasaki Ninja ZX-25R tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Kawasaki Versys 650" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Kawasaki Versys 650</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 152.000.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Atas</span>
+                                                                                    <span class="category-badge">Kawasaki</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Kawasaki Versys 650 tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Suzuki Burgman Street" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Suzuki Burgman Street</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 34.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Suzuki</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Suzuki Burgman Street tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Suzuki GSX-R150" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Suzuki GSX-R150</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 37.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Suzuki</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Suzuki GSX-R150 tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Yamaha WR 155" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Yamaha WR 155</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 39.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2024
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Yamaha</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha WR 155 tahun 2024" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Yamaha NMAX Connected" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Yamaha NMAX Connected</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 40.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Yamaha</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha NMAX Connected tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Yamaha XSR 155" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Yamaha XSR 155</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 38.500.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2025
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Menengah</span>
+                                                                                    <span class="category-badge">Yamaha</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Yamaha XSR 155 tahun 2025" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="motor-card">
+                            <!-- Gambar Motor -->
+                            <div class="motor-image">
+                                                                    <!-- Gambar Utama Motor (Clickable) -->
+                                    <a href="store-detail.html" class="motor-image-link">
+                                        <img src="images/no-photo.svg" 
+                                             alt="Honda Vario 160 CBS" 
+                                             class="img-fluid motor-preview-image">
+                                    </a>
+                                    
+                                    <!-- Badge Jumlah Foto -->
+                                                                                                </div>
+
+                            <!-- Informasi Motor -->
+                            <div class="motor-info">
+                                <!-- Nama Motor -->
+                                <h5 class="motor-title">Honda Vario 160 CBS</h5>
+                                
+                                <!-- Harga Motor -->
+                                <div class="motor-price">
+                                    Rp 28.000.000
+                                </div>
+
+                                <!-- Detail Motor -->
+                                <div class="motor-details">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        2024
+                                    </span>
+                                </div>
+
+                                <!-- Badge Kategori Motor -->
+                                                                    <div class="mb-3">
+                                                                                    <span class="category-badge">Kelas Bawah</span>
+                                                                                    <span class="category-badge">Honda</span>
+                                                                                                                            <span class="category-badge">+2</span>
+                                                                            </div>
+                                
+                                <!-- Tombol Aksi -->
+                                <div class="d-grid gap-2">
+                                    <!-- Tombol Lihat Detail -->
+                                    <a href="store-detail.html" class="btn btn-primary">
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lihat Detail
+                                    </a>
+                                    
+                                    <!-- Tombol WhatsApp -->
+                                    <a href="https://wa.me/6282135277434?text=Halo, saya tertarik dengan motor Honda Vario 160 CBS tahun 2024" 
+                                       target="_blank" 
+                                       class="btn btn-outline-success">
+                                        <i class="fab fa-whatsapp me-1"></i>
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-5">
+                <nav>
+        <ul class="pagination">
+            
+                            <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Previous">
+                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                </li>
+            
+            
+                            
+                
+                
+                                                                                        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                                                                                                <li class="page-item"><a class="page-link" href="store-2.html">2</a></li>
+                                                                        
+            
+                            <li class="page-item">
+                    <a class="page-link" href="store-2.html" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+                </li>
+                    </ul>
+    </nav>
+
+            </div>
+            </div>
+</section>
+
+<!-- Contact Section - Informasi Kontak -->
+<section id="contact" class="py-5 bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <!-- Header Kontak -->
+                <h2 class="mb-4">
+                    <i class="fas fa-phone text-primary me-2"></i>
+                    Butuh Bantuan?
+                </h2>
+                <p class="lead mb-4">
+                    Tim kami siap membantu Anda menemukan motor yang tepat. 
+                    Hubungi kami sekarang juga!
+                </p>
+                
+                <!-- Card Kontak -->
+                <div class="row g-3">
+                    <!-- WhatsApp -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center py-4">
+                                <i class="fab fa-whatsapp fa-3x text-success mb-3"></i>
+                                <h5>WhatsApp</h5>
+                                <p class="text-muted">+62 821-3527-7434</p>
+                                <a href="https://wa.me/6282135277434" target="_blank" class="btn btn-success">
+                                    Chat Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Telepon -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-phone fa-3x text-primary mb-3"></i>
+                                <h5>Telepon</h5>
+                                <p class="text-muted">+62 821-3527-7434</p>
+                                <a href="tel:+6282135277434" class="btn btn-primary">
+                                    Telepon Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Alamat -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-map-marker-alt fa-3x text-danger mb-3"></i>
+                                <h5>Alamat</h5>
+                                <p class="text-muted">Jalan Pandanaran - Uii</p>
+                                <a href="https://maps.app.goo.gl/GDqPT6xRwyg5KmgdA" target="_blank" class="btn btn-danger">
+                                    Lihat Lokasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="panel"><div id="admin-table"></div></div>
-  </section>
-</div>
+</section>
+    </main>
 
-<div id="modal" class="modal" hidden>
-  <div class="modal-box">
-    <h2 id="modal-title">Unit</h2>
-    <form id="modal-form" onsubmit="return saveForm(event)"></form>
-    <div class="modal-actions">
-      <button class="btn btn-outline-dark" onclick="closeModal()">Batal</button>
-      <button class="btn btn-primary" form="modal-form">Simpan</button>
-    </div>
-  </div>
-</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>
+                        <i class="fas fa-motorcycle me-2"></i>
+                        Dewa Motor
+                    </h5>
+                    <p class="text-light">
+                        Dealer motor terpercaya dengan koleksi motor berkualitas tinggi 
+                        dan pelayanan terbaik untuk kebutuhan transportasi Anda.
+                    </p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Menu</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="index.html">Motor</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Kontak</h5>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Jl. Pandanaran - Uii
+                        </li>
+                        <li>
+                            <i class="fas fa-phone me-2"></i>
+                            +62 821-3527-7434
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope me-2"></i>
+                            infodewamotor@gmail.com
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Jam Operasional</h5>
+                    <ul class="footer-links">
+                        <li>Senin - Jumat: 08:00 - 17:00</li>
+                        <li>Sabtu: 08:00 - 15:00</li>
+                        <li>Minggu: Tutup</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            
+            <div class="text-center">
+                <p class="text-light mb-0">
+                    &copy; 2026 Dewa Motor. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
 
-<footer class="foot">Dewa Motor — proyek portofolio <a href="https://portofolio-hasbi.web.id" target="_blank" rel="noopener">Muhammad Hasbi Ash Shiddiqi</a>. Aplikasi aslinya (Laravel) mengelola data kendaraan, dokumen kendaraan (BPKB/STNK), dan kategori unit.</footer>
-
-<script src="app.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+    // Auto submit form ketika pengurutan berubah
+    document.addEventListener('DOMContentLoaded', function() {
+        const sortSelect = document.querySelector('select[name="sort"]');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                document.getElementById('filterForm').submit();
+            });
+        }
+        
+        // Tambahkan smooth scrolling untuk link
+        document.querySelectorAll('.motor-image-link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Add a subtle loading effect
+                this.style.opacity = '0.8';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+    });
+</script>
+<script src="demo.js"></script>
 </body>
 </html>

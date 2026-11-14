@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a">
+    <title>Tambah Kendaraan</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="build/assets/css/app-C_buJ0U-.css" /><link rel="modulepreload" href="build/assets/js/app-CQkwklQS.js" /><link rel="modulepreload" href="build/assets/js/vendor-Cbz-uQkA.js" /><link rel="stylesheet" href="build/assets/css/app-C_buJ0U-.css" /><script type="module" src="build/assets/js/app-CQkwklQS.js"></script>    
+    <style>
+.price-input {
+    text-align: left;
+}
+.price-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 58, 138, 0.25);
+    border-color: var(--primary-color);
+}
+.price-input.is-invalid {
+    border-color: #dc3545;
+}
+.price-input.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+.form-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-light);
+}
+</style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-section">
+                    <div class="brand-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h3>Dewa Motor</h3>
+                        <span>Admin Panel</span>
+                    </div>
+                </div>
+                <button id="sidebarToggle" class="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu">
+                <ul class="menu-list">
+                    <li class="menu-item" data-entity="dashboard">
+                        <a href="admin.html" class="menu-link" data-tooltip="Dashboard" data-route="admin.dashboard,home">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="kendaraans">
+                        <a href="kendaraans.html" class="menu-link" data-tooltip="Kelola Kendaraan" data-route="kendaraans">
+                            <i class="fas fa-motorcycle"></i>
+                            <span>Kelola Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="dokumen-kendaraans">
+                        <a href="dokumen.html" class="menu-link" data-tooltip="Dokumen Kendaraan" data-route="dokumen-kendaraans">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Dokumen Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="categories">
+                        <a href="categories.html" class="menu-link" data-tooltip="Kelola Kategori" data-route="categories">
+                            <i class="fas fa-tags"></i>
+                            <span>Kelola Kategori</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="store">
+                        <a href="index.html" class="menu-link" data-tooltip="Halaman Store" data-route="store">
+                            <i class="fas fa-store"></i>
+                            <span>Halaman Store</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="admin">
+                        <a href="admin.html" class="menu-link" data-tooltip="Token Admin" data-route="admin.token-info">
+                            <i class="fas fa-key"></i>
+                            <span>Token Admin</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link logout-link" data-tooltip="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" method="POST" action="index.html" style="display: none;">
+                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Top Navigation -->
+            <nav class="admin-navbar">
+                <div class="navbar-content">
+                    <div class="navbar-left">
+                        <button class="mobile-toggle" id="mobileToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="page-title-container">
+                            <h5 class="page-title" id="pageTitle">Tambah Kendaraan</h5>
+                            <div class="page-indicator" id="pageIndicator"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-right">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Header Section -->
+<div class="card fade-in">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="card-title mb-0">Tambah Kendaraan Baru</h4>
+                <p class="text-muted mb-0">Isi informasi lengkap kendaraan yang akan ditambahkan</p>
+            </div>
+            <a href="kendaraans.html" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-1"></i>
+                Kembali
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Errors -->
+
+        <!-- Form Tambah Kendaraan dengan Upload -->
+        <form action="kendaraans.html" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">            
+            <!-- Section 1: Informasi Identitas Kendaraan -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5 class="mb-3">Informasi Identitas Kendaraan</h5>
+                </div>
+                <!-- Input Nomor Rangka -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="nomor_rangka" class="form-label">Nomor Rangka</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-fingerprint"></i></span>
+                            <input type="text" class="form-control" id="nomor_rangka" name="nomor_rangka" value="" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Input Nomor Mesin -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="nomor_mesin" class="form-label">Nomor Mesin</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-cog"></i></span>
+                            <input type="text" class="form-control" id="nomor_mesin" name="nomor_mesin" value="" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Input Nomor Polisi -->
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="nomor_polisi" class="form-label">Nomor Polisi</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-car"></i></span>
+                            <input type="text" class="form-control" id="nomor_polisi" name="nomor_polisi" value="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Detail Kendaraan -->
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="mb-3">Detail Kendaraan</h5>
+                </div>
+                <!-- Kolom Kiri: Merek, Model, Tahun -->
+                <div class="col-md-6">
+                    <!-- Input Merek -->
+                    <div class="form-group mb-3">
+                        <label for="merek" class="form-label">Merek</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-trademark"></i></span>
+                            <input type="text" class="form-control" id="merek" name="merek" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Input Model -->
+                    <div class="form-group mb-3">
+                        <label for="model" class="form-label">Model</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-motorcycle"></i></span>
+                            <input type="text" class="form-control" id="model" name="model" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Input Tahun Pembuatan -->
+                    <div class="form-group mb-3">
+                        <label for="tahun_pembuatan" class="form-label">Tahun Pembuatan</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            <input type="number" class="form-control" id="tahun_pembuatan" name="tahun_pembuatan" value="" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Harga Modal dan Jual -->
+                <div class="col-md-6">
+                    <!-- Input Harga Modal -->
+                    <div class="form-group mb-3">
+                        <label for="harga_modal" class="form-label">Harga Modal</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-money-bill"></i></span>
+                            <input type="text" class="form-control price-input" id="harga_modal_display" value="" placeholder="0" required>
+                            <input type="hidden" id="harga_modal" name="harga_modal" value="">
+                        </div>
+                    </div>
+
+                    <!-- Input Harga Jual -->
+                    <div class="form-group mb-3">
+                        <label for="harga_jual" class="form-label">Harga Jual</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                            <input type="text" class="form-control price-input" id="harga_jual_display" value="" placeholder="0" required>
+                            <input type="hidden" id="harga_jual" name="harga_jual" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Kategori Kendaraan -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5 class="mb-3">Kategori Kendaraan</h5>
+                </div>
+                <!-- Dropdown Kelas Kendaraan -->
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="class_category" class="form-label">Kelas Kendaraan</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-layer-group"></i></span>
+                            <select class="form-select" id="class_category" name="class_category">
+                                <option value="">Pilih Kelas Kendaraan</option>
+                                                                    <option value="1" 
+                                        >
+                                        Kelas Atas
+                                    </option>
+                                                                    <option value="2" 
+                                        >
+                                        Kelas Menengah
+                                    </option>
+                                                                    <option value="3" 
+                                        >
+                                        Kelas Bawah
+                                    </option>
+                                                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Kategori Merek -->
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="brand_category" class="form-label">Kategori Merek</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-trademark"></i></span>
+                            <select class="form-select" id="brand_category" name="brand_category">
+                                <option value="">Pilih Kategori Merek</option>
+                                                                    <option value="4" 
+                                        >
+                                        Honda
+                                    </option>
+                                                                    <option value="5" 
+                                        >
+                                        Yamaha
+                                    </option>
+                                                                    <option value="6" 
+                                        >
+                                        Suzuki
+                                    </option>
+                                                                    <option value="7" 
+                                        >
+                                        Vespa
+                                    </option>
+                                                                    <option value="8" 
+                                        >
+                                        Kawasaki
+                                    </option>
+                                                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Kelengkapan Dokumen -->
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="document_category" class="form-label">Kelengkapan Dokumen</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-file-alt"></i></span>
+                            <select class="form-select" id="document_category" name="document_category">
+                                <option value="">Pilih Kelengkapan Dokumen</option>
+                                                                    <option value="9" 
+                                        >
+                                        Lengkap
+                                    </option>
+                                                                    <option value="10" 
+                                        >
+                                        Kurang Lengkap
+                                    </option>
+                                                                    <option value="11" 
+                                        >
+                                        Tidak Ada
+                                    </option>
+                                                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Kondisi Kendaraan -->
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="condition_category" class="form-label">Kondisi Kendaraan</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa fa-wrench"></i></span>
+                            <select class="form-select" id="condition_category" name="condition_category">
+                                <option value="">Pilih Kondisi Kendaraan</option>
+                                                                    <option value="12" 
+                                        >
+                                        Mulus
+                                    </option>
+                                                                    <option value="13" 
+                                        >
+                                        Normal
+                                    </option>
+                                                                    <option value="14" 
+                                        >
+                                        Butuh Perbaikan
+                                    </option>
+                                                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Upload Foto Kendaraan -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5 class="mb-3">Foto Kendaraan</h5>
+                </div>
+                <div class="col-12">
+                    <!-- Drag & Drop Zone untuk Upload Foto -->
+                    <div class="form-group mb-3">
+                        <label for="photos" class="form-label">Upload Foto</label>
+                        <div class="photo-upload-zone" id="photo-upload-zone">
+                            <div class="text-center">
+                                <i class="fa fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                <h6>Drag & Drop foto di sini</h6>
+                                <p class="text-muted">atau</p>
+                                <input type="file" class="form-control" id="photos" name="photos[]" multiple accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('photos').click()">
+                                    <i class="fa fa-plus"></i> Pilih Foto
+                                </button>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">
+                            Pilih beberapa foto sekaligus. Format yang didukung: JPG, PNG, GIF. Maksimal 2MB per foto.
+                        </small>
+                    </div>
+                    
+                    <!-- Container Preview Foto -->
+                    <div id="photo-preview" class="row mt-3" style="display: none;">
+                        <div class="col-12">
+                            <h6>Preview Foto:</h6>
+                            <div id="preview-container" class="photo-preview-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Simpan -->
+            <div class="text-end mt-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save me-2"></i>
+                    Simpan Kendaraan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript untuk Drag & Drop dan Preview Foto -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photos');
+    const previewContainer = document.getElementById('preview-container');
+    const photoPreview = document.getElementById('photo-preview');
+    const uploadZone = document.getElementById('photo-upload-zone');
+    let selectedFiles = [];
+
+    // Event handler untuk drag and drop
+    uploadZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+    });
+
+    // Event handler untuk file input
+    photoInput.addEventListener('change', function(e) {
+        const files = e.target.files;
+        handleFiles(files);
+    });
+
+    // Fungsi untuk menangani file yang dipilih
+    function handleFiles(files) {
+        selectedFiles = Array.from(files);
+        displayPreviews();
+    }
+
+    // Fungsi untuk menampilkan preview foto
+    function displayPreviews() {
+        previewContainer.innerHTML = '';
+        
+        if (selectedFiles.length > 0) {
+            photoPreview.style.display = 'block';
+            
+            selectedFiles.forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const imageContainer = document.createElement('div');
+                        imageContainer.className = 'photo-preview-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.type = 'button';
+                        removeBtn.className = 'photo-preview-remove';
+                        removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                        removeBtn.onclick = function() {
+                            selectedFiles.splice(index, 1);
+                            updateFileInput();
+                            displayPreviews();
+                        };
+                        
+                        imageContainer.appendChild(img);
+                        imageContainer.appendChild(removeBtn);
+                        previewContainer.appendChild(imageContainer);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        } else {
+            photoPreview.style.display = 'none';
+        }
+    }
+
+    // Fungsi untuk update file input
+    function updateFileInput() {
+        const dt = new DataTransfer();
+        selectedFiles.forEach(file => dt.items.add(file));
+        photoInput.files = dt.files;
+    }
+
+    // Fungsi untuk format harga dengan titik pemisah ribuan
+    function formatPrice(value) {
+        // Hapus semua karakter non-digit
+        const numericValue = value.replace(/\D/g, '');
+        
+        // Format dengan titik sebagai pemisah ribuan
+        return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    // Fungsi untuk hapus format dan dapatkan nilai numerik
+    function getNumericValue(value) {
+        return value.replace(/\./g, '');
+    }
+
+    // Fungsi untuk validasi harga
+    function validatePrices() {
+        const hargaModal = parseInt(getNumericValue(hargaModalDisplay.value || '0'));
+        const hargaJual = parseInt(getNumericValue(hargaJualDisplay.value || '0'));
+        
+        if (hargaJual > 0 && hargaModal > 0 && hargaJual < hargaModal) {
+            return false;
+        }
+        return true;
+    }
+
+    // Fungsi untuk menampilkan peringatan
+    function showPriceWarning() {
+        // Hapus peringatan yang sudah ada
+        const existingWarning = document.getElementById('price-warning');
+        if (existingWarning) {
+            existingWarning.remove();
+        }
+
+        // Buat peringatan baru
+        const warning = document.createElement('div');
+        warning.id = 'price-warning';
+        warning.className = 'alert alert-warning alert-dismissible fade show mt-2';
+        warning.innerHTML = `
+            <i class="fa fa-exclamation-triangle me-2"></i>
+            <strong>Peringatan:</strong> Harga jual tidak boleh lebih rendah dari harga modal!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        // Tambahkan setelah input harga jual
+        hargaJualDisplay.closest('.form-group').appendChild(warning);
+        
+        // Tambahkan class error ke input
+        hargaJualDisplay.classList.add('is-invalid');
+    }
+
+    // Fungsi untuk menghapus peringatan
+    function removePriceWarning() {
+        const warning = document.getElementById('price-warning');
+        if (warning) {
+            warning.remove();
+        }
+        hargaJualDisplay.classList.remove('is-invalid');
+    }
+
+    // Event listener untuk input harga modal
+    const hargaModalDisplay = document.getElementById('harga_modal_display');
+    const hargaModalHidden = document.getElementById('harga_modal');
+    
+    hargaModalDisplay.addEventListener('input', function(e) {
+        const formatted = formatPrice(e.target.value);
+        e.target.value = formatted;
+        hargaModalHidden.value = getNumericValue(formatted);
+        
+        // Validasi ulang harga jika harga jual sudah diisi
+        if (hargaJualDisplay.value) {
+            if (validatePrices()) {
+                removePriceWarning();
+            } else {
+                showPriceWarning();
+            }
+        }
+    });
+
+    // Event listener untuk input harga jual
+    const hargaJualDisplay = document.getElementById('harga_jual_display');
+    const hargaJualHidden = document.getElementById('harga_jual');
+    
+    hargaJualDisplay.addEventListener('input', function(e) {
+        const formatted = formatPrice(e.target.value);
+        e.target.value = formatted;
+        hargaJualHidden.value = getNumericValue(formatted);
+        
+        // Validasi harga
+        if (validatePrices()) {
+            removePriceWarning();
+        } else {
+            showPriceWarning();
+        }
+    });
+
+    // Validasi saat form akan disubmit
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        if (!validatePrices()) {
+            e.preventDefault();
+            showPriceWarning();
+            
+            // Scroll ke peringatan
+            document.getElementById('price-warning').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+            
+            return false;
+        }
+    });
+
+    // Set nilai awal jika ada old value
+    if (hargaModalDisplay.value) {
+        hargaModalHidden.value = getNumericValue(hargaModalDisplay.value);
+    }
+    if (hargaJualDisplay.value) {
+        hargaJualHidden.value = getNumericValue(hargaJualDisplay.value);
+    }
+});
+</script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            // Check localStorage for saved state
+            const sidebarState = localStorage.getItem('adminSidebarCollapsed');
+            const isCollapsed = sidebarState === 'true';
+            
+            // Apply saved state only on desktop
+            if (window.innerWidth >= 768 && isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+            sidebarToggle?.addEventListener('click', function() {
+                const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
+                
+                if (isCurrentlyCollapsed) {
+                    sidebar.classList.remove('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'false');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'true');
+                }
+            });
+            
+            // Mobile toggle functionality
+            mobileToggle?.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 768 && 
+                    sidebar.classList.contains('mobile-open') &&
+                    !sidebar.contains(event.target) && 
+                    !mobileToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // Desktop: Remove mobile classes and restore collapsed state
+                    sidebar.classList.remove('mobile-open');
+                    const savedState = localStorage.getItem('adminSidebarCollapsed');
+                    if (savedState === 'true') {
+                        sidebar.classList.add('collapsed');
+                    }
+                } else {
+                    // Mobile: Remove collapsed class and close mobile menu
+                    sidebar.classList.remove('collapsed', 'mobile-open');
+                }
+            });
+            
+            // Enhanced active class logic with route-based matching
+            function setActiveMenuItem() {
+                const currentRoute = 'kendaraans.create';
+                const currentPath = window.location.pathname;
+                const menuItems = document.querySelectorAll('.menu-item');
+                const pageIndicator = document.getElementById('pageIndicator');
+                
+                // Remove all active classes first
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Find and set active menu item
+                const menuLinks = document.querySelectorAll('.menu-link');
+                let activeSet = false;
+                let activePageTitle = 'Dashboard';
+                
+                // Sort links by route specificity (more specific routes first)
+                const sortedLinks = Array.from(menuLinks).sort((a, b) => {
+                    const routesA = a.getAttribute('data-route') || '';
+                    const routesB = b.getAttribute('data-route') || '';
+                    return routesB.length - routesA.length;
+                });
+                
+                sortedLinks.forEach(link => {
+                    if (activeSet) return; // Skip if already found active item
+                    
+                    const href = link.getAttribute('href');
+                    const routes = link.getAttribute('data-route');
+                    const tooltip = link.getAttribute('data-tooltip');
+                    
+                    if (routes) {
+                        const routeArray = routes.split(',');
+                        
+                        // Check for exact route match first
+                        if (routeArray.some(route => currentRoute === route.trim())) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                        
+                        // Check for route prefix match (more specific)
+                        if (routeArray.some(route => currentRoute.startsWith(route.trim() + '.'))) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                    }
+                });
+                
+                // Fallback to path-based matching only if no route match found
+                if (!activeSet) {
+                    sortedLinks.forEach(link => {
+                        if (activeSet) return;
+                        
+                        const href = link.getAttribute('href');
+                        const tooltip = link.getAttribute('data-tooltip');
+                        
+                        if (href && href !== '#') {
+                            // Exact path match
+                            if (href === currentPath) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Path contains match (but avoid substring conflicts)
+                            if (href !== '/' && currentPath.startsWith(href + '/')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Home/dashboard specific handling
+                            if (href === '/' && (currentPath === '/' || currentPath === '/home')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                        }
+                    });
+                }
+                
+                // Special handling for admin dashboard routes (last resort)
+                if (!activeSet && (currentRoute === 'admin.dashboard' || currentRoute === 'home' || currentPath === '/' || currentPath === '/home')) {
+                    const dashboardLink = document.querySelector('[data-route*="admin.dashboard"]');
+                    if (dashboardLink) {
+                        dashboardLink.closest('.menu-item').classList.add('active');
+                        activePageTitle = 'Dashboard';
+                    }
+                }
+                
+                // Update page indicator
+                if (pageIndicator) {
+                    pageIndicator.classList.add('active');
+                }
+            }
+            
+            // Call the function on page load
+            setActiveMenuItem();
+            
+            // Add click handlers for menu links to provide immediate feedback
+            const menuLinks = document.querySelectorAll('.menu-link:not(.logout-link)');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all items
+                    document.querySelectorAll('.menu-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.closest('.menu-item').classList.add('active');
+                    
+                    // Add a loading indicator (optional)
+                    const icon = this.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-spinner fa-spin';
+                    
+                    // Restore original icon after a short delay (in case of slow navigation)
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1000);
+                });
+            });
+            
+            // Enhanced tooltip positioning for collapsed sidebar
+            function updateTooltipPositions() {
+                if (sidebar.classList.contains('collapsed')) {
+                    const menuLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                    menuLinks.forEach(link => {
+                        const rect = link.getBoundingClientRect();
+                        const tooltipData = link.getAttribute('data-tooltip');
+                        
+                        if (tooltipData) {
+                            // Update tooltip positioning based on viewport
+                            const viewportHeight = window.innerHeight;
+                            const linkTop = rect.top;
+                            
+                            if (linkTop > viewportHeight * 0.7) {
+                                link.style.setProperty('--tooltip-position', 'top');
+                            } else {
+                                link.style.setProperty('--tooltip-position', 'center');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Update tooltip positions on scroll and resize
+            window.addEventListener('scroll', updateTooltipPositions);
+            window.addEventListener('resize', updateTooltipPositions);
+            
+            // Prevent tooltip flicker on hover
+            if (window.innerWidth >= 768) {
+                const collapsedLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                collapsedLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        if (sidebar.classList.contains('collapsed')) {
+                            this.style.zIndex = '1002';
+                        }
+                    });
+                    link.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <script src="demo.js"></script>
+</body>
+</html>

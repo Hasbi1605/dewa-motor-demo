@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a">
+    <title>Kelola Kategori</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="build/assets/css/app-C_buJ0U-.css" /><link rel="modulepreload" href="build/assets/js/app-CQkwklQS.js" /><link rel="modulepreload" href="build/assets/js/vendor-Cbz-uQkA.js" /><link rel="stylesheet" href="build/assets/css/app-C_buJ0U-.css" /><script type="module" src="build/assets/js/app-CQkwklQS.js"></script>    
+    <style>
+/* Unified Action Buttons with Consistent Outline */
+.action-buttons {
+    display: inline-flex;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons .action-btn,
+.action-buttons form,
+.action-buttons form .action-btn {
+    border: 2px solid #6c757d !important;
+    background-color: transparent !important;
+    color: #6c757d !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 !important;
+    position: relative;
+    margin: 0 !important;
+    padding: 0.375rem 0.5rem;
+}
+
+/* Form elements within button group */
+.action-buttons form {
+    display: inline-flex;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+}
+
+/* Remove borders between connected buttons */
+.action-buttons .action-btn + .action-btn,
+.action-buttons .action-btn + form .action-btn,
+.action-buttons form + .action-btn,
+.action-buttons form + form .action-btn,
+.action-buttons form .action-btn + form .action-btn {
+    border-left: none !important;
+}
+
+/* First button styling */
+.action-buttons .action-btn:first-child,
+.action-buttons form:first-child .action-btn {
+    border-top-left-radius: 0.375rem !important;
+    border-bottom-left-radius: 0.375rem !important;
+}
+
+/* Last button styling */
+.action-buttons .action-btn:last-child,
+.action-buttons form:last-child .action-btn {
+    border-top-right-radius: 0.375rem !important;
+    border-bottom-right-radius: 0.375rem !important;
+}
+
+/* Handle middle buttons */
+.action-buttons .action-btn:not(:first-child):not(:last-child),
+.action-buttons form:not(:first-child):not(:last-child) .action-btn {
+    border-radius: 0 !important;
+}
+
+/* Unified hover state for all buttons */
+.action-buttons .action-btn:hover,
+.action-buttons form .action-btn:hover {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: #ffffff !important;
+    z-index: 2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Focus state for accessibility */
+.action-buttons .action-btn:focus,
+.action-buttons form .action-btn:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.25) !important;
+    z-index: 3;
+}
+
+/* Icon styling */
+.action-buttons .action-btn i {
+    font-size: 0.875rem;
+}
+
+/* Specific button color variations on hover */
+.action-buttons .btn-outline-warning.action-btn:hover,
+.action-buttons form .btn-outline-warning.action-btn:hover {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.action-buttons .btn-outline-danger.action-btn:hover,
+.action-buttons form .btn-outline-danger.action-btn:hover {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .action-buttons .action-btn,
+    .action-buttons form .action-btn {
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    
+    .action-buttons .action-btn i {
+        font-size: 0.75rem;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-section">
+                    <div class="brand-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h3>Dewa Motor</h3>
+                        <span>Admin Panel</span>
+                    </div>
+                </div>
+                <button id="sidebarToggle" class="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu">
+                <ul class="menu-list">
+                    <li class="menu-item" data-entity="dashboard">
+                        <a href="admin.html" class="menu-link" data-tooltip="Dashboard" data-route="admin.dashboard,home">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="kendaraans">
+                        <a href="kendaraans.html" class="menu-link" data-tooltip="Kelola Kendaraan" data-route="kendaraans">
+                            <i class="fas fa-motorcycle"></i>
+                            <span>Kelola Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="dokumen-kendaraans">
+                        <a href="dokumen.html" class="menu-link" data-tooltip="Dokumen Kendaraan" data-route="dokumen-kendaraans">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Dokumen Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="categories">
+                        <a href="categories.html" class="menu-link" data-tooltip="Kelola Kategori" data-route="categories">
+                            <i class="fas fa-tags"></i>
+                            <span>Kelola Kategori</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="store">
+                        <a href="index.html" class="menu-link" data-tooltip="Halaman Store" data-route="store">
+                            <i class="fas fa-store"></i>
+                            <span>Halaman Store</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="admin">
+                        <a href="admin.html" class="menu-link" data-tooltip="Token Admin" data-route="admin.token-info">
+                            <i class="fas fa-key"></i>
+                            <span>Token Admin</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link logout-link" data-tooltip="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" method="POST" action="index.html" style="display: none;">
+                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Top Navigation -->
+            <nav class="admin-navbar">
+                <div class="navbar-content">
+                    <div class="navbar-left">
+                        <button class="mobile-toggle" id="mobileToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="page-title-container">
+                            <h5 class="page-title" id="pageTitle">Kelola Kategori</h5>
+                            <div class="page-indicator" id="pageIndicator"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-right">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Header Section -->
+<div class="card fade-in">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="card-title mb-2">Kelola Kategori</h4>
+                <p class="text-muted mb-0">Atur kategori kendaraan berdasarkan kelas, merek, dokumen, dan kondisi</p>
+            </div>
+            <a href="categories-create.html" class="btn btn-success">
+                <i class="fas fa-plus me-1"></i>
+                Tambah Kategori
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Messages -->
+
+
+<!-- Categories Grid -->
+<div class="row g-4 mt-1">
+    <!-- Kategori Kelas -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-layer-group me-2 text-primary"></i>
+                    Kelas Kendaraan
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Nama</th>
+                                <th style="width: 45%;">Deskripsi</th>
+                                <th class="text-end" style="width: 20%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td class="fw-medium">Kelas Atas</td>
+                                <td class="text-muted small">Range Harga 60 Juta ke Atas</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Kelas Menengah</td>
+                                <td class="text-muted small">Range Harga 30 Juta - 60 Juta</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Kelas Bawah</td>
+                                <td class="text-muted small">Range Harga di Bawah 30 Juta</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Kategori Merek -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-trademark me-2 text-primary"></i>
+                    Merek Kendaraan
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Nama</th>
+                                <th style="width: 45%;">Deskripsi</th>
+                                <th class="text-end" style="width: 20%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td class="fw-medium">Honda</td>
+                                <td class="text-muted small">Merek Honda</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Yamaha</td>
+                                <td class="text-muted small">Merek Yamaha</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Suzuki</td>
+                                <td class="text-muted small">Merek Suzuki</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Vespa</td>
+                                <td class="text-muted small">Merek Vespa</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Kawasaki</td>
+                                <td class="text-muted small">Merek Kawasaki</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kategori Dokumen -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-file-alt me-2 text-primary"></i>
+                    Kelengkapan Dokumen
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Nama</th>
+                                <th style="width: 45%;">Deskripsi</th>
+                                <th class="text-end" style="width: 20%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td class="fw-medium">Lengkap</td>
+                                <td class="text-muted small">Semua dokumen lengkap</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Kurang Lengkap</td>
+                                <td class="text-muted small">Sebagian dokumen tidak lengkap</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Tidak Ada</td>
+                                <td class="text-muted small">Dokumen tidak tersedia</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kategori Kondisi -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-check-circle me-2 text-primary"></i>
+                    Kondisi Kendaraan
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 35%;">Nama</th>
+                                <th style="width: 45%;">Deskripsi</th>
+                                <th class="text-end" style="width: 20%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td class="fw-medium">Mulus</td>
+                                <td class="text-muted small">Kondisi sangat baik</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Normal</td>
+                                <td class="text-muted small">Kondisi normal dengan</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td class="fw-medium">Butuh Perbaikan</td>
+                                <td class="text-muted small">Memerlukan perbaikan</td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm action-buttons" role="group">
+                                        <a href="categories-edit.html" class="btn btn-outline-warning action-btn" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="categories.html" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                                            <input type="hidden" name="_method" value="DELETE">                                            <button type="submit" class="btn btn-outline-danger action-btn" title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            // Check localStorage for saved state
+            const sidebarState = localStorage.getItem('adminSidebarCollapsed');
+            const isCollapsed = sidebarState === 'true';
+            
+            // Apply saved state only on desktop
+            if (window.innerWidth >= 768 && isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+            sidebarToggle?.addEventListener('click', function() {
+                const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
+                
+                if (isCurrentlyCollapsed) {
+                    sidebar.classList.remove('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'false');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'true');
+                }
+            });
+            
+            // Mobile toggle functionality
+            mobileToggle?.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 768 && 
+                    sidebar.classList.contains('mobile-open') &&
+                    !sidebar.contains(event.target) && 
+                    !mobileToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // Desktop: Remove mobile classes and restore collapsed state
+                    sidebar.classList.remove('mobile-open');
+                    const savedState = localStorage.getItem('adminSidebarCollapsed');
+                    if (savedState === 'true') {
+                        sidebar.classList.add('collapsed');
+                    }
+                } else {
+                    // Mobile: Remove collapsed class and close mobile menu
+                    sidebar.classList.remove('collapsed', 'mobile-open');
+                }
+            });
+            
+            // Enhanced active class logic with route-based matching
+            function setActiveMenuItem() {
+                const currentRoute = 'categories.index';
+                const currentPath = window.location.pathname;
+                const menuItems = document.querySelectorAll('.menu-item');
+                const pageIndicator = document.getElementById('pageIndicator');
+                
+                // Remove all active classes first
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Find and set active menu item
+                const menuLinks = document.querySelectorAll('.menu-link');
+                let activeSet = false;
+                let activePageTitle = 'Dashboard';
+                
+                // Sort links by route specificity (more specific routes first)
+                const sortedLinks = Array.from(menuLinks).sort((a, b) => {
+                    const routesA = a.getAttribute('data-route') || '';
+                    const routesB = b.getAttribute('data-route') || '';
+                    return routesB.length - routesA.length;
+                });
+                
+                sortedLinks.forEach(link => {
+                    if (activeSet) return; // Skip if already found active item
+                    
+                    const href = link.getAttribute('href');
+                    const routes = link.getAttribute('data-route');
+                    const tooltip = link.getAttribute('data-tooltip');
+                    
+                    if (routes) {
+                        const routeArray = routes.split(',');
+                        
+                        // Check for exact route match first
+                        if (routeArray.some(route => currentRoute === route.trim())) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                        
+                        // Check for route prefix match (more specific)
+                        if (routeArray.some(route => currentRoute.startsWith(route.trim() + '.'))) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                    }
+                });
+                
+                // Fallback to path-based matching only if no route match found
+                if (!activeSet) {
+                    sortedLinks.forEach(link => {
+                        if (activeSet) return;
+                        
+                        const href = link.getAttribute('href');
+                        const tooltip = link.getAttribute('data-tooltip');
+                        
+                        if (href && href !== '#') {
+                            // Exact path match
+                            if (href === currentPath) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Path contains match (but avoid substring conflicts)
+                            if (href !== '/' && currentPath.startsWith(href + '/')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Home/dashboard specific handling
+                            if (href === '/' && (currentPath === '/' || currentPath === '/home')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                        }
+                    });
+                }
+                
+                // Special handling for admin dashboard routes (last resort)
+                if (!activeSet && (currentRoute === 'admin.dashboard' || currentRoute === 'home' || currentPath === '/' || currentPath === '/home')) {
+                    const dashboardLink = document.querySelector('[data-route*="admin.dashboard"]');
+                    if (dashboardLink) {
+                        dashboardLink.closest('.menu-item').classList.add('active');
+                        activePageTitle = 'Dashboard';
+                    }
+                }
+                
+                // Update page indicator
+                if (pageIndicator) {
+                    pageIndicator.classList.add('active');
+                }
+            }
+            
+            // Call the function on page load
+            setActiveMenuItem();
+            
+            // Add click handlers for menu links to provide immediate feedback
+            const menuLinks = document.querySelectorAll('.menu-link:not(.logout-link)');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all items
+                    document.querySelectorAll('.menu-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.closest('.menu-item').classList.add('active');
+                    
+                    // Add a loading indicator (optional)
+                    const icon = this.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-spinner fa-spin';
+                    
+                    // Restore original icon after a short delay (in case of slow navigation)
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1000);
+                });
+            });
+            
+            // Enhanced tooltip positioning for collapsed sidebar
+            function updateTooltipPositions() {
+                if (sidebar.classList.contains('collapsed')) {
+                    const menuLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                    menuLinks.forEach(link => {
+                        const rect = link.getBoundingClientRect();
+                        const tooltipData = link.getAttribute('data-tooltip');
+                        
+                        if (tooltipData) {
+                            // Update tooltip positioning based on viewport
+                            const viewportHeight = window.innerHeight;
+                            const linkTop = rect.top;
+                            
+                            if (linkTop > viewportHeight * 0.7) {
+                                link.style.setProperty('--tooltip-position', 'top');
+                            } else {
+                                link.style.setProperty('--tooltip-position', 'center');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Update tooltip positions on scroll and resize
+            window.addEventListener('scroll', updateTooltipPositions);
+            window.addEventListener('resize', updateTooltipPositions);
+            
+            // Prevent tooltip flicker on hover
+            if (window.innerWidth >= 768) {
+                const collapsedLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                collapsedLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        if (sidebar.classList.contains('collapsed')) {
+                            this.style.zIndex = '1002';
+                        }
+                    });
+                    link.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <script src="demo.js"></script>
+</body>
+</html>

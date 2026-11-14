@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a">
+    <title>Edit Kategori</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="build/assets/css/app-C_buJ0U-.css" /><link rel="modulepreload" href="build/assets/js/app-CQkwklQS.js" /><link rel="modulepreload" href="build/assets/js/vendor-Cbz-uQkA.js" /><link rel="stylesheet" href="build/assets/css/app-C_buJ0U-.css" /><script type="module" src="build/assets/js/app-CQkwklQS.js"></script>    
+    </head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-section">
+                    <div class="brand-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h3>Dewa Motor</h3>
+                        <span>Admin Panel</span>
+                    </div>
+                </div>
+                <button id="sidebarToggle" class="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu">
+                <ul class="menu-list">
+                    <li class="menu-item" data-entity="dashboard">
+                        <a href="admin.html" class="menu-link" data-tooltip="Dashboard" data-route="admin.dashboard,home">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="kendaraans">
+                        <a href="kendaraans.html" class="menu-link" data-tooltip="Kelola Kendaraan" data-route="kendaraans">
+                            <i class="fas fa-motorcycle"></i>
+                            <span>Kelola Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="dokumen-kendaraans">
+                        <a href="dokumen.html" class="menu-link" data-tooltip="Dokumen Kendaraan" data-route="dokumen-kendaraans">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Dokumen Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="categories">
+                        <a href="categories.html" class="menu-link" data-tooltip="Kelola Kategori" data-route="categories">
+                            <i class="fas fa-tags"></i>
+                            <span>Kelola Kategori</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="store">
+                        <a href="index.html" class="menu-link" data-tooltip="Halaman Store" data-route="store">
+                            <i class="fas fa-store"></i>
+                            <span>Halaman Store</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="admin">
+                        <a href="admin.html" class="menu-link" data-tooltip="Token Admin" data-route="admin.token-info">
+                            <i class="fas fa-key"></i>
+                            <span>Token Admin</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link logout-link" data-tooltip="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" method="POST" action="index.html" style="display: none;">
+                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Top Navigation -->
+            <nav class="admin-navbar">
+                <div class="navbar-content">
+                    <div class="navbar-left">
+                        <button class="mobile-toggle" id="mobileToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="page-title-container">
+                            <h5 class="page-title" id="pageTitle">Dashboard</h5>
+                            <div class="page-indicator" id="pageIndicator"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-right">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Card Container untuk Form Edit Kategori -->
+<div class="card">
+    <!-- Header Card dengan Judul dan Tombol Kembali -->
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <h4 class="card-title mb-0">Edit Kategori</h4>
+            <a href="categories.html" class="btn btn-danger btn-round ms-auto">
+                <i class="fa fa-arrow-left"></i>
+                Kembali
+            </a>
+        </div>
+    </div>
+    
+    <!-- Body Card berisi Form -->
+    <div class="card-body">
+        <!-- Alert untuk menampilkan Error Validasi -->
+        
+        <!-- Form Edit Kategori -->
+        <form action="categories.html" method="POST">
+            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">            <input type="hidden" name="_method" value="PUT">            <div class="row">
+                <!-- Kolom Kiri: Input Nama dan Tipe -->
+                <div class="col-md-6">
+                    <!-- Input Nama Kategori -->
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label">Nama Kategori</label>
+                        <input type="text" class="form-control" id="name" name="name" value="Kelas Atas" required>
+                    </div>
+                    
+                    <!-- Dropdown Tipe Kategori -->
+                    <div class="form-group mb-3">
+                        <label for="type" class="form-label">Tipe Kategori</label>
+                        <select name="type" id="type" class="form-select" required>
+                            <option value="">Pilih Tipe Kategori</option>
+                                                            <option value="class" selected>
+                                                                            Kelas Kendaraan
+                                                                    </option>
+                                                            <option value="brand" >
+                                                                            Merek
+                                                                    </option>
+                                                            <option value="document" >
+                                                                            Kelengkapan Dokumen
+                                                                    </option>
+                                                            <option value="condition" >
+                                                                            Kondisi Kendaraan
+                                                                    </option>
+                                                    </select>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Textarea Deskripsi -->
+                <div class="col-md-6">
+                    <!-- Textarea Deskripsi Kategori -->
+                    <div class="form-group mb-3">
+                        <label for="description" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="description" name="description" rows="6">Range Harga 60 Juta ke Atas</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Simpan Perubahan -->
+            <div class="text-end mt-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save me-2"></i>
+                    Simpan Perubahan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            // Check localStorage for saved state
+            const sidebarState = localStorage.getItem('adminSidebarCollapsed');
+            const isCollapsed = sidebarState === 'true';
+            
+            // Apply saved state only on desktop
+            if (window.innerWidth >= 768 && isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+            sidebarToggle?.addEventListener('click', function() {
+                const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
+                
+                if (isCurrentlyCollapsed) {
+                    sidebar.classList.remove('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'false');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'true');
+                }
+            });
+            
+            // Mobile toggle functionality
+            mobileToggle?.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 768 && 
+                    sidebar.classList.contains('mobile-open') &&
+                    !sidebar.contains(event.target) && 
+                    !mobileToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // Desktop: Remove mobile classes and restore collapsed state
+                    sidebar.classList.remove('mobile-open');
+                    const savedState = localStorage.getItem('adminSidebarCollapsed');
+                    if (savedState === 'true') {
+                        sidebar.classList.add('collapsed');
+                    }
+                } else {
+                    // Mobile: Remove collapsed class and close mobile menu
+                    sidebar.classList.remove('collapsed', 'mobile-open');
+                }
+            });
+            
+            // Enhanced active class logic with route-based matching
+            function setActiveMenuItem() {
+                const currentRoute = 'categories.edit';
+                const currentPath = window.location.pathname;
+                const menuItems = document.querySelectorAll('.menu-item');
+                const pageIndicator = document.getElementById('pageIndicator');
+                
+                // Remove all active classes first
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Find and set active menu item
+                const menuLinks = document.querySelectorAll('.menu-link');
+                let activeSet = false;
+                let activePageTitle = 'Dashboard';
+                
+                // Sort links by route specificity (more specific routes first)
+                const sortedLinks = Array.from(menuLinks).sort((a, b) => {
+                    const routesA = a.getAttribute('data-route') || '';
+                    const routesB = b.getAttribute('data-route') || '';
+                    return routesB.length - routesA.length;
+                });
+                
+                sortedLinks.forEach(link => {
+                    if (activeSet) return; // Skip if already found active item
+                    
+                    const href = link.getAttribute('href');
+                    const routes = link.getAttribute('data-route');
+                    const tooltip = link.getAttribute('data-tooltip');
+                    
+                    if (routes) {
+                        const routeArray = routes.split(',');
+                        
+                        // Check for exact route match first
+                        if (routeArray.some(route => currentRoute === route.trim())) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                        
+                        // Check for route prefix match (more specific)
+                        if (routeArray.some(route => currentRoute.startsWith(route.trim() + '.'))) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                    }
+                });
+                
+                // Fallback to path-based matching only if no route match found
+                if (!activeSet) {
+                    sortedLinks.forEach(link => {
+                        if (activeSet) return;
+                        
+                        const href = link.getAttribute('href');
+                        const tooltip = link.getAttribute('data-tooltip');
+                        
+                        if (href && href !== '#') {
+                            // Exact path match
+                            if (href === currentPath) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Path contains match (but avoid substring conflicts)
+                            if (href !== '/' && currentPath.startsWith(href + '/')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Home/dashboard specific handling
+                            if (href === '/' && (currentPath === '/' || currentPath === '/home')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                        }
+                    });
+                }
+                
+                // Special handling for admin dashboard routes (last resort)
+                if (!activeSet && (currentRoute === 'admin.dashboard' || currentRoute === 'home' || currentPath === '/' || currentPath === '/home')) {
+                    const dashboardLink = document.querySelector('[data-route*="admin.dashboard"]');
+                    if (dashboardLink) {
+                        dashboardLink.closest('.menu-item').classList.add('active');
+                        activePageTitle = 'Dashboard';
+                    }
+                }
+                
+                // Update page indicator
+                if (pageIndicator) {
+                    pageIndicator.classList.add('active');
+                }
+            }
+            
+            // Call the function on page load
+            setActiveMenuItem();
+            
+            // Add click handlers for menu links to provide immediate feedback
+            const menuLinks = document.querySelectorAll('.menu-link:not(.logout-link)');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all items
+                    document.querySelectorAll('.menu-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.closest('.menu-item').classList.add('active');
+                    
+                    // Add a loading indicator (optional)
+                    const icon = this.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-spinner fa-spin';
+                    
+                    // Restore original icon after a short delay (in case of slow navigation)
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1000);
+                });
+            });
+            
+            // Enhanced tooltip positioning for collapsed sidebar
+            function updateTooltipPositions() {
+                if (sidebar.classList.contains('collapsed')) {
+                    const menuLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                    menuLinks.forEach(link => {
+                        const rect = link.getBoundingClientRect();
+                        const tooltipData = link.getAttribute('data-tooltip');
+                        
+                        if (tooltipData) {
+                            // Update tooltip positioning based on viewport
+                            const viewportHeight = window.innerHeight;
+                            const linkTop = rect.top;
+                            
+                            if (linkTop > viewportHeight * 0.7) {
+                                link.style.setProperty('--tooltip-position', 'top');
+                            } else {
+                                link.style.setProperty('--tooltip-position', 'center');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Update tooltip positions on scroll and resize
+            window.addEventListener('scroll', updateTooltipPositions);
+            window.addEventListener('resize', updateTooltipPositions);
+            
+            // Prevent tooltip flicker on hover
+            if (window.innerWidth >= 768) {
+                const collapsedLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                collapsedLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        if (sidebar.classList.contains('collapsed')) {
+                            this.style.zIndex = '1002';
+                        }
+                    });
+                    link.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <script src="demo.js"></script>
+</body>
+</html>

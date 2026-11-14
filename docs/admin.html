@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a">
+    <title>Dashboard Admin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="build/assets/css/app-C_buJ0U-.css" /><link rel="modulepreload" href="build/assets/js/app-CQkwklQS.js" /><link rel="modulepreload" href="build/assets/js/vendor-Cbz-uQkA.js" /><link rel="stylesheet" href="build/assets/css/app-C_buJ0U-.css" /><script type="module" src="build/assets/js/app-CQkwklQS.js"></script>    
+    <style>
+/* Stats card layout */
+.stats-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stats-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* Hover effects */
+.stats-card.hover-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Quick action buttons */
+.btn.py-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn.py-3 i {
+    font-size: 1.25rem;
+}
+
+/* Table improvements */
+.table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    .btn.py-3 {
+        padding: 0.75rem !important;
+        font-size: 0.8rem;
+    }
+    
+    .btn.py-3 i {
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-section">
+                    <div class="brand-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h3>Dewa Motor</h3>
+                        <span>Admin Panel</span>
+                    </div>
+                </div>
+                <button id="sidebarToggle" class="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu">
+                <ul class="menu-list">
+                    <li class="menu-item" data-entity="dashboard">
+                        <a href="admin.html" class="menu-link" data-tooltip="Dashboard" data-route="admin.dashboard,home">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="kendaraans">
+                        <a href="kendaraans.html" class="menu-link" data-tooltip="Kelola Kendaraan" data-route="kendaraans">
+                            <i class="fas fa-motorcycle"></i>
+                            <span>Kelola Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="dokumen-kendaraans">
+                        <a href="dokumen.html" class="menu-link" data-tooltip="Dokumen Kendaraan" data-route="dokumen-kendaraans">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Dokumen Kendaraan</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="categories">
+                        <a href="categories.html" class="menu-link" data-tooltip="Kelola Kategori" data-route="categories">
+                            <i class="fas fa-tags"></i>
+                            <span>Kelola Kategori</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="store">
+                        <a href="index.html" class="menu-link" data-tooltip="Halaman Store" data-route="store">
+                            <i class="fas fa-store"></i>
+                            <span>Halaman Store</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-entity="admin">
+                        <a href="admin.html" class="menu-link" data-tooltip="Token Admin" data-route="admin.token-info">
+                            <i class="fas fa-key"></i>
+                            <span>Token Admin</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link logout-link" data-tooltip="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                        <form id="logout-form" method="POST" action="index.html" style="display: none;">
+                            <input type="hidden" name="_token" value="jUsZVvDqyeVrnnw59HYADSYdMNNo6WBNVXpXMU8a" autocomplete="off">                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <!-- Top Navigation -->
+            <nav class="admin-navbar">
+                <div class="navbar-content">
+                    <div class="navbar-left">
+                        <button class="mobile-toggle" id="mobileToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="page-title-container">
+                            <h5 class="page-title" id="pageTitle">Dashboard</h5>
+                            <div class="page-indicator" id="pageIndicator"></div>
+                        </div>
+                    </div>
+                    <div class="navbar-right">
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <div class="admin-content">
+                <!-- Welcome Section -->
+<div class="card fade-in">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="card-title mb-0">Selamat Datang di Dashboard Admin</h4>
+                <p class="text-muted mb-0 mt-1">Kelola database kendaraan Dewa Motor dengan mudah dan efisien</p>
+            </div>
+            <div class="text-end">
+                <span class="badge bg-light text-dark border">
+                    <i class="fas fa-calendar-alt me-1"></i>
+                    14 November 2026
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Messages -->
+
+
+<!-- Statistics Cards -->
+<div class="row g-4 mt-1">
+    <!-- Total Kendaraan -->
+    <div class="col-lg-3 col-md-6">
+        <div class="stats-card hover-card">
+            <div class="stats-icon primary">
+                <i class="fas fa-motorcycle"></i>
+            </div>
+            <div>
+                <h3 class="mb-1">24</h3>
+                <p class="text-muted mb-0">Total Kendaraan</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Kendaraan Tersedia -->
+    <div class="col-lg-3 col-md-6">
+        <div class="stats-card hover-card">
+            <div class="stats-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+                <h3 class="mb-1">24</h3>
+                <p class="text-muted mb-0">Kendaraan Tersedia</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Kendaraan Terjual -->
+    <div class="col-lg-3 col-md-6">
+        <div class="stats-card hover-card">
+            <div class="stats-icon danger">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div>
+                <h3 class="mb-1">0</h3>
+                <p class="text-muted mb-0">Kendaraan Terjual</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Total Keuntungan -->
+    <div class="col-lg-3 col-md-6">
+        <div class="stats-card hover-card">
+            <div class="stats-icon warning">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div>
+                <h3 class="mb-1">Rp 0</h3>
+                <p class="text-muted mb-0">Total Keuntungan</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row g-4 mt-2">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Aksi Cepat
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3 col-6">
+                        <a href="kendaraans-create.html" class="btn btn-success w-100 py-3">
+                            <i class="fas fa-plus me-2"></i>
+                            Tambah Kendaraan
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="kendaraans.html" class="btn btn-primary w-100 py-3">
+                            <i class="fas fa-motorcycle me-2"></i>
+                            Kelola Kendaraan
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="dokumen.html" class="btn btn-info w-100 py-3 text-white">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Kelola Dokumen
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="index.html" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-store me-2"></i>
+                            Lihat Store
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Kendaraan Termahal dan Termurah -->
+<div class="row g-4 mt-2">
+    <!-- 5 Kendaraan Termahal -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-arrow-up me-2 text-danger"></i>
+                        5 Kendaraan Termahal
+                    </h4>
+                </div>
+            </div>
+            <div class="card-body">
+                                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Kendaraan</th>
+                                <th class="text-end">Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Kawasaki" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Kawasaki Versys 650</span>
+                                            <br><small class="text-muted">2025</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-danger">
+                                        Rp 152.000.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Kawasaki" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Kawasaki Ninja ZX-25R</span>
+                                            <br><small class="text-muted">2025</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-danger">
+                                        Rp 108.000.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Yamaha" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Yamaha Tmax</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-danger">
+                                        Rp 88.000.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Honda" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Honda Rebel 500</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-danger">
+                                        Rp 81.000.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Honda" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Honda CBR 250RR</span>
+                                            <br><small class="text-muted">2025</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-danger">
+                                        Rp 79.500.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+                            </div>
+        </div>
+    </div>
+
+    <!-- 5 Kendaraan Termurah -->
+    <div class="col-lg-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-arrow-down me-2 text-success"></i>
+                        5 Kendaraan Termurah
+                    </h4>
+                </div>
+            </div>
+            <div class="card-body">
+                                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Kendaraan</th>
+                                <th class="text-end">Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Honda" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Honda Revo</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">
+                                        Rp 18.500.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Yamaha" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Yamaha Mio Fino</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">
+                                        Rp 21.500.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Yamaha" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Yamaha Fazzio Luxury</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">
+                                        Rp 24.500.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Honda" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Honda Vario 160 CBS</span>
+                                            <br><small class="text-muted">2024</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">
+                                        Rp 28.000.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                                                                    <img src="images/no-photo.svg" 
+                                                 alt="Honda" 
+                                                 class="rounded me-2" 
+                                                 style="width: 40px; height: 40px; object-fit: cover;">
+                                                                                <div>
+                                            <span class="fw-medium">Honda Street RS</span>
+                                            <br><small class="text-muted">2025</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <span class="fw-bold text-success">
+                                        Rp 30.500.000
+                                    </span>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+                            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Vehicles - Simplified -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">
+                    <i class="fas fa-clock me-2"></i>
+                    Kendaraan Terbaru
+                </h4>
+                <a href="kendaraans.html" class="btn btn-sm btn-outline-primary">
+                    Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Kendaraan</th>
+                                    <th>Nomor Polisi</th>
+                                    <th>Tahun</th>
+                                    <th>Harga</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                                                            <img src="images/no-photo.svg" 
+                                                     alt="Yamaha" 
+                                                     class="rounded me-2" 
+                                                     style="width: 45px; height: 45px; object-fit: cover;">
+                                                                                        <span class="fw-medium">Yamaha XSR 155</span>
+                                        </div>
+                                    </td>
+                                    <td>B0123KJM</td>
+                                    <td>2025</td>
+                                    <td>
+                                        <span class="fw-medium text-success">
+                                            Rp 38.500.000
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Tersedia
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="kendaraans.html" 
+                                           class="btn btn-sm btn-primary" title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                                                            <img src="images/no-photo.svg" 
+                                                     alt="Honda" 
+                                                     class="rounded me-2" 
+                                                     style="width: 45px; height: 45px; object-fit: cover;">
+                                                                                        <span class="fw-medium">Honda Street RS</span>
+                                        </div>
+                                    </td>
+                                    <td>B6789KJM</td>
+                                    <td>2025</td>
+                                    <td>
+                                        <span class="fw-medium text-success">
+                                            Rp 30.500.000
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Tersedia
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="kendaraans.html" 
+                                           class="btn btn-sm btn-primary" title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                                                            <img src="images/no-photo.svg" 
+                                                     alt="Suzuki" 
+                                                     class="rounded me-2" 
+                                                     style="width: 45px; height: 45px; object-fit: cover;">
+                                                                                        <span class="fw-medium">Suzuki GSX-R150</span>
+                                        </div>
+                                    </td>
+                                    <td>B2345KJM</td>
+                                    <td>2025</td>
+                                    <td>
+                                        <span class="fw-medium text-success">
+                                            Rp 37.500.000
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Tersedia
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="kendaraans.html" 
+                                           class="btn btn-sm btn-primary" title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                                                            <img src="images/no-photo.svg" 
+                                                     alt="Kawasaki" 
+                                                     class="rounded me-2" 
+                                                     style="width: 45px; height: 45px; object-fit: cover;">
+                                                                                        <span class="fw-medium">Kawasaki Versys 650</span>
+                                        </div>
+                                    </td>
+                                    <td>B8901KJM</td>
+                                    <td>2025</td>
+                                    <td>
+                                        <span class="fw-medium text-success">
+                                            Rp 152.000.000
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Tersedia
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="kendaraans.html" 
+                                           class="btn btn-sm btn-primary" title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                                                            <img src="images/no-photo.svg" 
+                                                     alt="Honda" 
+                                                     class="rounded me-2" 
+                                                     style="width: 45px; height: 45px; object-fit: cover;">
+                                                                                        <span class="fw-medium">Honda CBR 250RR</span>
+                                        </div>
+                                    </td>
+                                    <td>B0987KJM</td>
+                                    <td>2025</td>
+                                    <td>
+                                        <span class="fw-medium text-success">
+                                            Rp 79.500.000
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Tersedia
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="kendaraans.html" 
+                                           class="btn btn-sm btn-primary" title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                                            </tbody>
+                        </table>
+                    </div>
+                            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            // Check localStorage for saved state
+            const sidebarState = localStorage.getItem('adminSidebarCollapsed');
+            const isCollapsed = sidebarState === 'true';
+            
+            // Apply saved state only on desktop
+            if (window.innerWidth >= 768 && isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+            sidebarToggle?.addEventListener('click', function() {
+                const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
+                
+                if (isCurrentlyCollapsed) {
+                    sidebar.classList.remove('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'false');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.setItem('adminSidebarCollapsed', 'true');
+                }
+            });
+            
+            // Mobile toggle functionality
+            mobileToggle?.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth < 768 && 
+                    sidebar.classList.contains('mobile-open') &&
+                    !sidebar.contains(event.target) && 
+                    !mobileToggle.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // Desktop: Remove mobile classes and restore collapsed state
+                    sidebar.classList.remove('mobile-open');
+                    const savedState = localStorage.getItem('adminSidebarCollapsed');
+                    if (savedState === 'true') {
+                        sidebar.classList.add('collapsed');
+                    }
+                } else {
+                    // Mobile: Remove collapsed class and close mobile menu
+                    sidebar.classList.remove('collapsed', 'mobile-open');
+                }
+            });
+            
+            // Enhanced active class logic with route-based matching
+            function setActiveMenuItem() {
+                const currentRoute = 'admin.dashboard';
+                const currentPath = window.location.pathname;
+                const menuItems = document.querySelectorAll('.menu-item');
+                const pageIndicator = document.getElementById('pageIndicator');
+                
+                // Remove all active classes first
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Find and set active menu item
+                const menuLinks = document.querySelectorAll('.menu-link');
+                let activeSet = false;
+                let activePageTitle = 'Dashboard';
+                
+                // Sort links by route specificity (more specific routes first)
+                const sortedLinks = Array.from(menuLinks).sort((a, b) => {
+                    const routesA = a.getAttribute('data-route') || '';
+                    const routesB = b.getAttribute('data-route') || '';
+                    return routesB.length - routesA.length;
+                });
+                
+                sortedLinks.forEach(link => {
+                    if (activeSet) return; // Skip if already found active item
+                    
+                    const href = link.getAttribute('href');
+                    const routes = link.getAttribute('data-route');
+                    const tooltip = link.getAttribute('data-tooltip');
+                    
+                    if (routes) {
+                        const routeArray = routes.split(',');
+                        
+                        // Check for exact route match first
+                        if (routeArray.some(route => currentRoute === route.trim())) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                        
+                        // Check for route prefix match (more specific)
+                        if (routeArray.some(route => currentRoute.startsWith(route.trim() + '.'))) {
+                            link.closest('.menu-item').classList.add('active');
+                            activePageTitle = tooltip || 'Dashboard';
+                            activeSet = true;
+                            return;
+                        }
+                    }
+                });
+                
+                // Fallback to path-based matching only if no route match found
+                if (!activeSet) {
+                    sortedLinks.forEach(link => {
+                        if (activeSet) return;
+                        
+                        const href = link.getAttribute('href');
+                        const tooltip = link.getAttribute('data-tooltip');
+                        
+                        if (href && href !== '#') {
+                            // Exact path match
+                            if (href === currentPath) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Path contains match (but avoid substring conflicts)
+                            if (href !== '/' && currentPath.startsWith(href + '/')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                            
+                            // Home/dashboard specific handling
+                            if (href === '/' && (currentPath === '/' || currentPath === '/home')) {
+                                link.closest('.menu-item').classList.add('active');
+                                activePageTitle = tooltip || 'Dashboard';
+                                activeSet = true;
+                                return;
+                            }
+                        }
+                    });
+                }
+                
+                // Special handling for admin dashboard routes (last resort)
+                if (!activeSet && (currentRoute === 'admin.dashboard' || currentRoute === 'home' || currentPath === '/' || currentPath === '/home')) {
+                    const dashboardLink = document.querySelector('[data-route*="admin.dashboard"]');
+                    if (dashboardLink) {
+                        dashboardLink.closest('.menu-item').classList.add('active');
+                        activePageTitle = 'Dashboard';
+                    }
+                }
+                
+                // Update page indicator
+                if (pageIndicator) {
+                    pageIndicator.classList.add('active');
+                }
+            }
+            
+            // Call the function on page load
+            setActiveMenuItem();
+            
+            // Add click handlers for menu links to provide immediate feedback
+            const menuLinks = document.querySelectorAll('.menu-link:not(.logout-link)');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all items
+                    document.querySelectorAll('.menu-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.closest('.menu-item').classList.add('active');
+                    
+                    // Add a loading indicator (optional)
+                    const icon = this.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-spinner fa-spin';
+                    
+                    // Restore original icon after a short delay (in case of slow navigation)
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1000);
+                });
+            });
+            
+            // Enhanced tooltip positioning for collapsed sidebar
+            function updateTooltipPositions() {
+                if (sidebar.classList.contains('collapsed')) {
+                    const menuLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                    menuLinks.forEach(link => {
+                        const rect = link.getBoundingClientRect();
+                        const tooltipData = link.getAttribute('data-tooltip');
+                        
+                        if (tooltipData) {
+                            // Update tooltip positioning based on viewport
+                            const viewportHeight = window.innerHeight;
+                            const linkTop = rect.top;
+                            
+                            if (linkTop > viewportHeight * 0.7) {
+                                link.style.setProperty('--tooltip-position', 'top');
+                            } else {
+                                link.style.setProperty('--tooltip-position', 'center');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Update tooltip positions on scroll and resize
+            window.addEventListener('scroll', updateTooltipPositions);
+            window.addEventListener('resize', updateTooltipPositions);
+            
+            // Prevent tooltip flicker on hover
+            if (window.innerWidth >= 768) {
+                const collapsedLinks = document.querySelectorAll('.admin-sidebar.collapsed .menu-link');
+                collapsedLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        if (sidebar.classList.contains('collapsed')) {
+                            this.style.zIndex = '1002';
+                        }
+                    });
+                    link.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <script src="demo.js"></script>
+</body>
+</html>
